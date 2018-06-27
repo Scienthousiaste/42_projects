@@ -6,7 +6,7 @@
 #    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/25 18:21:10 by tbehra            #+#    #+#              #
-#    Updated: 2018/06/26 18:36:39 by tbehra           ###   ########.fr        #
+#    Updated: 2018/06/27 17:44:21 by tbehra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJDIR	= obj
 INCDIR	= include
 
 SRC		= main.c complex.c mandelbrot.c mlx.c display.c images.c colors.c \
-		  utils.c
+		  utils.c julia.c
 
 HEAD	= fractol.h libft.h
 

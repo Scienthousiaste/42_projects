@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:48:46 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/26 18:43:36 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/27 18:31:04 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int main(int ac, char **av)
 	d.x_max = 1;
 	d.y_min = -1;
 	d.y_max = 1;
-	d.display_fractal = &mandelbrot;
+//	d.display_fractal = &mandelbrot;
+	d.display_fractal = &julia;
 	init_display(&d);
 	d.display_fractal(&d);
 	mlx_key_hook(d.win, &deal_key, &d);

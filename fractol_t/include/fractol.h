@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:31:19 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/26 19:14:45 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/27 18:11:44 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <math.h>
 # include <mlx.h>
 # include <stdlib.h>
+# include <pthread.h>
 # include "libft.h"
 # include "display.h"
 
@@ -70,6 +71,8 @@ typedef struct	s_display
 	double		y_max;
 	int			n_iter;
 	t_pixel		**map;
+
+	t_complex	julia_param;
 }				t_display;
 
 int				compute_mandelbrot_values(t_complex c, int n_iter);
@@ -81,6 +84,8 @@ double			squared_modulus(t_complex c);
 
 int				mandelbrot_diverge(t_pixel *p, int n_iter);
 void			mandelbrot(t_display *d);
+
+void			julia(t_display *d);
 
 void			refresh_screen(t_display *d, int opt);
 void			compute_coordinates_map(t_display *d);
@@ -98,5 +103,7 @@ void			build_color_palette(t_display *d);
 
 void			vertical_line(t_display *d, int x, int y_start, int y_end, int color);
 void			horizontal_line(t_display *d, int y, int x_start, int x_end, int color);
+
+void			free_map(t_display *d);
 
 #endif

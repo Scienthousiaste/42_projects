@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 15:52:10 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/26 17:12:56 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/27 18:31:13 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	find_color(t_display *d, int n_div)
 {
-	(void)n_div;
-	(void)d;
 	return (d->color_palette[(n_div - 1) % N_COLOR]);
+	/*
 	if ((n_div - 1) < N_COLOR)
 		return (d->color_palette[n_div - 1]);
 	else
 		return (WHITE);
+		*/
 }
 
 void	build_color_palette(t_display *d)
