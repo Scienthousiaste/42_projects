@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:44:31 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/29 14:58:59 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/30 18:02:52 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int		julia_diverge(t_pixel *p, int n_iter, t_complex julia_param)
 			return (p->n_iter_div);
 		i = (p->n_iter_value == 0) ? 0 : p->n_iter_value;
 	}
-	z = (p->n_iter_value == 0) ? julia_param : p->z_value;
+	z = (p->n_iter_value == 0) ? p->z : p->z_value;
 	while (++i <= n_iter)
 	{
-		z = c_add(c_mult(z, z), p->z);
+		z = c_add(c_mult(z, z), julia_param);
 		if (squared_modulus(z) >= 4)
 		{
 			p->n_iter_div = i;
@@ -45,6 +45,17 @@ int		julia_diverge(t_pixel *p, int n_iter, t_complex julia_param)
 	p->z_value = z;
 	p->n_iter_value = n_iter;
 	return (0);
+}
+
+void	init_julia(t_display *d)
+{
+	d->win_width = (d->win_width != 0) ? d->win_width : DEFAULT_WIN_WIDTH_J;
+	d->win_height = (d->win_height != 0) ? d->win_height : DEFAULT_WIN_HEIGHT_J;
+	d->x_min = -2;
+	d->x_max = 2;
+	d->y_min = -2;
+	d->y_max = 2;	
+	d->julia_param = c_init(DEFAULT_JULIA_RE, DEFAULT_JULIA_IM);
 }
 
 void	julia(t_display *d)

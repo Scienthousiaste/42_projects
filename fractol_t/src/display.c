@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 11:17:54 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/29 17:21:16 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/30 16:42:05 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,12 @@ void	refresh_screen(t_display *d, int opt)
 
 void	init_display(t_display *d)
 {	
-	d->win_width = (d->win_width != 0) ? d->win_width : DEFAULT_WIN_WIDTH;
-	d->win_height = (d->win_height != 0) ? d->win_height : DEFAULT_WIN_HEIGHT;
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, d->win_width, d->win_height, WIN_TITLE);
 	d->n_iter = N_ITER_INIT;
 	d->img = mlx_new_image(d->mlx, d->win_width, d->win_height);
 	d->img_ptr = mlx_get_data_addr(d->img, &(d->bits_per_pixel),
 			&(d->size_line), &(d->endian));
-
-	d->julia_param = c_init(0.12, 0.4);
-
 	build_color_palette(d);
 	if (!(d->map = (t_pixel**)malloc(sizeof(t_pixel*) * d->win_height)))
 		error(MALLOC_ERROR);

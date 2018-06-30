@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:31:19 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/29 17:27:47 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/30 16:43:41 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,27 @@
 #include <stdio.h>
 //
 //
-#define MALLOC_ERROR 1
-#define INVALID_OPTION 2
-#define INVALID_WINDOW_SIZE 3
+# define MALLOC_ERROR 1
+# define INVALID_OPTION 2
+# define INVALID_WINDOW_SIZE 3
 
-#define RECOMPUTE_COORD 2
-#define REINIT_MAP 4
+# define RECOMPUTE_COORD 2
+# define REINIT_MAP 4
 
-# define N_ITER_INIT 1
+# define DEFAULT_JULIA_RE 0.285
+# define DEFAULT_JULIA_IM 0.013
+# define DEFAULT_WIN_WIDTH_J 1200
+# define DEFAULT_WIN_HEIGHT_J 1200
+# define DEFAULT_WIN_WIDTH_M 1800
+# define DEFAULT_WIN_HEIGHT_M 1200
+
+# define N_ITER_INIT 20
 # define N_COLOR 18
-# define DEFAULT_WIN_WIDTH 1800
-# define DEFAULT_WIN_HEIGHT 1200
 # define MIN_WIN_WIDTH 40
 # define MIN_WIN_HEIGHT 40
 # define MAX_WIN_WIDTH 3000
 # define MAX_WIN_HEIGHT 1800
+
 # define WIN_TITLE "Fract'Ol"
 
 typedef struct	s_complex
@@ -71,6 +77,7 @@ typedef struct	s_display
 	int			win_height;
 
 	void		(*display_fractal)(struct s_display *d);
+	void		(*init_fractal)(struct s_display *d);
 	int			color_palette[N_COLOR];
 
 	double		x_min;
@@ -91,8 +98,9 @@ void			c_print(t_complex c);
 double			squared_modulus(t_complex c);
 
 int				mandelbrot_diverge(t_pixel *p, int n_iter);
+void			init_mandelbrot(t_display *d);
 void			mandelbrot(t_display *d);
-
+void			init_julia(t_display *d);
 void			julia(t_display *d);
 
 void			refresh_screen(t_display *d, int opt);

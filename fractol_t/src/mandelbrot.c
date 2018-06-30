@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:56:30 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/29 14:55:24 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/30 19:01:54 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,35 @@ int		mandelbrot_diverge(t_pixel *p, int n_iter)
 	return (0);
 }
 
+void	init_mandelbrot(t_display *d)
+{
+	d->win_width = (d->win_width != 0) ?
+		d->win_width : DEFAULT_WIN_WIDTH_M;
+	d->win_height = (d->win_height != 0) ?
+		d->win_height : DEFAULT_WIN_HEIGHT_M;
+	d->x_min = -2;
+	d->x_max = 1;
+	d->y_min = -1;
+	d->y_max = 1;
+}
+
+void	mandel2(void *dd)
+{
+	t_display *d;
+
+	d = (t_display*)dd;
+	printf("voici le thread 2 qui ira de %i a %i.\n", d->win_width / 2,
+			d->win_height / 2);
+}
+
 void	mandelbrot(t_display *d)
 {
 	int x;
 	int y;
 	int n_div;
+	pthread_t	thread;
 
+	pthread_create(&thread, NULL, &mandel2, (void*)d); 
 	y = -1;
 	while (++y < d->win_height)
 	{
