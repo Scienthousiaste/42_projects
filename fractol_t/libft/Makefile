@@ -6,7 +6,7 @@
 #    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/20 14:33:20 by tbehra            #+#    #+#              #
-#    Updated: 2018/06/21 13:50:36 by tbehra           ###   ########.fr        #
+#    Updated: 2018/06/29 12:13:07 by tbehra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRC		= 	ft_lstiter.c ft_putendl.c ft_strequ.c ft_strnstr.c ft_lstmap.c 	\
 			ft_strnew.c ft_lstrev.c ft_lstsize.c ft_lstpush.c ft_lstcont.c	\
 			ft_lstprint.c ft_iswhitespace.c ft_itoa_base.c ft_utoa_base.c	\
 			ft_ultoa_base.c ft_ltoa_base.c ft_lltoa_base.c ft_umaxtoa_base.c\
-		   	ft_strtolower.c get_next_line.c ft_tabdel.c 
+		   	ft_strtolower.c get_next_line.c ft_tabdel.c ft_index.c
 
 INC		=	get_next_line.h libft.h
 

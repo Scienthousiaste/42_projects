@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:56:30 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/27 18:24:28 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/29 14:55:24 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void	mandelbrot(t_display *d)
 	int n_div;
 
 	y = -1;
-	while (++y < WIN_HEIGHT)
+	while (++y < d->win_height)
 	{
 		x = -1;
-		while (++x < WIN_WIDTH)
+		while (++x < d->win_width)
 		{
 			if ((n_div = mandelbrot_diverge(&(d->map[y][x]), d->n_iter)))
 				image_put_pixel(d, x, y, find_color(d, n_div));

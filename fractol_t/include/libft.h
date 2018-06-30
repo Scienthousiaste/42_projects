@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:31:16 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/21 13:50:52 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/29 12:12:54 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ char				*ft_lltoa_base(unsigned long long value, unsigned int base);
 char				*ft_umaxtoa_base(uintmax_t value, unsigned int base);
 char				*ft_strtolower(char *str);
 void				ft_tabdel(void **tab, int y);
+int					ft_index(const char *s, int c);
 
 #endif

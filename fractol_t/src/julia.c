@@ -6,11 +6,13 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:44:31 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/27 18:25:48 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/29 14:58:59 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+// utiliser : http://maths.wikidot.com/mandelbrot-et-julia
 
 int		julia_diverge(t_pixel *p, int n_iter, t_complex julia_param)
 {
@@ -52,10 +54,10 @@ void	julia(t_display *d)
 	int n_div;
 
 	y = -1;
-	while (++y < WIN_HEIGHT)
+	while (++y < d->win_height)
 	{
 		x = -1;
-		while (++x < WIN_WIDTH)
+		while (++x < d->win_width)
 		{
 			if ((n_div = julia_diverge(&(d->map[y][x]), d->n_iter,
 				d->julia_param)))

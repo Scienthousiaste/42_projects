@@ -6,13 +6,13 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 13:39:07 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/26 15:21:46 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/29 14:58:04 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	fill_img(void *img_to_fill, int color)
+void	fill_img(void *img_to_fill, int color, t_display *d)
 {
 	int		bits_per_pixel;
 	int		size_line;
@@ -23,7 +23,7 @@ void	fill_img(void *img_to_fill, int color)
 	img = mlx_get_data_addr(img_to_fill,
 			&bits_per_pixel, &size_line, &endian);
 	pos = 0;
-	while (pos < (size_line * WIN_HEIGHT))
+	while (pos < (size_line * d->win_height))
 	{
 		if (pos % 4 == 0)
 			img[pos] = (char)(color & 0xFF);

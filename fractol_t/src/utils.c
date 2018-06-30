@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 18:31:05 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/27 17:16:19 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/06/29 14:58:35 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_map(t_display *d)
 	int i;
 
 	i = 0;
-	while (++i <= WIN_HEIGHT)
+	while (++i <= d->win_height)
 	{
 		free(d->map[i - 1]);
 	}
