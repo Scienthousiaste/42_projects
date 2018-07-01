@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:31:19 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/30 16:43:41 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/01 17:34:22 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define MIN_WIN_HEIGHT 40
 # define MAX_WIN_WIDTH 3000
 # define MAX_WIN_HEIGHT 1800
+# define NB_THREAD 40 
 
 # define WIN_TITLE "Fract'Ol"
 
@@ -76,7 +77,7 @@ typedef struct	s_display
 	int			win_width;
 	int			win_height;
 
-	void		(*display_fractal)(struct s_display *d);
+	void		*(*display_fractal)(void *param);
 	void		(*init_fractal)(struct s_display *d);
 	int			color_palette[N_COLOR];
 
@@ -90,6 +91,14 @@ typedef struct	s_display
 	t_complex	julia_param;
 }				t_display;
 
+typedef struct	s_disp_bundle
+{
+	t_display	*d;
+	int			y_min;
+	int			y_max;
+	//pthread_mutex_t mutex;
+}				t_disp_bundle;
+
 int				compute_mandelbrot_values(t_complex c, int n_iter);
 t_complex		c_add(t_complex a, t_complex b);
 t_complex 		c_mult(t_complex a, t_complex b);
@@ -98,8 +107,9 @@ void			c_print(t_complex c);
 double			squared_modulus(t_complex c);
 
 int				mandelbrot_diverge(t_pixel *p, int n_iter);
+void			display_complex_fractal(t_display *d);
 void			init_mandelbrot(t_display *d);
-void			mandelbrot(t_display *d);
+void			*mandelbrot(void* param);
 void			init_julia(t_display *d);
 void			julia(t_display *d);
 

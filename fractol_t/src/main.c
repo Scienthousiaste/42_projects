@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:48:46 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/30 18:23:28 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/01 17:43:56 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	check_params(int ac, char **av, t_display *d)
 			else if (av[i][1] == 'j')
 			{
 				d->init_fractal = &init_julia;
-				d->display_fractal = &julia;
+//				d->display_fractal = &julia;
 			}
 			else if (av[i][1] == 'm')
 			{
@@ -99,7 +99,7 @@ int main(int ac, char **av)
 		usage();
 	d.init_fractal(&d);
 	init_display(&d);
-	d.display_fractal(&d);
+	display_complex_fractal(&d);
 	mlx_key_hook(d.win, &deal_key, &d);
 	mlx_mouse_hook(d.win, &deal_mouse, &d);
 	mlx_loop(d.mlx);
