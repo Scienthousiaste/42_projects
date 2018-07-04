@@ -101,7 +101,7 @@ void	refresh_screen(t_display *d, int opt)
 	if (opt == RECOMPUTE_COORD)
 		recompute_coordinates(d);
 	mlx_clear_window(d->mlx, d->win);
-	d->display_fractal(d);
+	display_complex_fractal(d);
 }
 
 void	init_display(t_display *d)

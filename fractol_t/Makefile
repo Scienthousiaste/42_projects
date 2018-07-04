@@ -35,6 +35,7 @@ INCP	= $(foreach dir, $(INCDIR), -I$(dir))
 
 MLXP	= -I/usr/local/include
 MLX		= -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit
+#MLX	= /Users/timothee/Dev/C/minilibx_macos/libmlx.a
 
 all: $(LIBFT) $(OBJDIR) $(NAME)
 

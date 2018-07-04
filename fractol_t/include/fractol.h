@@ -14,7 +14,7 @@
 # define FRACTOL_H
 
 # include <math.h>
-# include <mlx.h>
+# include "mlx.h"
 # include <stdlib.h>
 # include <pthread.h>
 # include "libft.h"
@@ -34,10 +34,10 @@
 
 # define DEFAULT_JULIA_RE 0.285
 # define DEFAULT_JULIA_IM 0.013
-# define DEFAULT_WIN_WIDTH_J 1200
-# define DEFAULT_WIN_HEIGHT_J 1200
-# define DEFAULT_WIN_WIDTH_M 1800
-# define DEFAULT_WIN_HEIGHT_M 1200
+# define DEFAULT_WIN_WIDTH_J 600
+# define DEFAULT_WIN_HEIGHT_J 600
+# define DEFAULT_WIN_WIDTH_M 1000
+# define DEFAULT_WIN_HEIGHT_M 600
 
 # define N_ITER_INIT 20
 # define N_COLOR 18
@@ -45,7 +45,7 @@
 # define MIN_WIN_HEIGHT 40
 # define MAX_WIN_WIDTH 3000
 # define MAX_WIN_HEIGHT 1800
-# define NB_THREAD 40 
+# define NB_THREAD 4
 
 # define WIN_TITLE "Fract'Ol"
 
