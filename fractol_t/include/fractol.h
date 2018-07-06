@@ -111,7 +111,7 @@ void			display_complex_fractal(t_display *d);
 void			init_mandelbrot(t_display *d);
 void			*mandelbrot(void* param);
 void			init_julia(t_display *d);
-void			julia(t_display *d);
+void			*julia(void *d);
 
 void			refresh_screen(t_display *d, int opt);
 void			compute_coordinates_map(t_display *d);

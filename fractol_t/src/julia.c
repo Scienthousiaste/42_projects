@@ -58,14 +58,18 @@ void	init_julia(t_display *d)
 	d->julia_param = c_init(DEFAULT_JULIA_RE, DEFAULT_JULIA_IM);
 }
 
-void	julia(t_display *d)
+void	*julia(void *param)
 {
-	int x;
-	int y;
-	int n_div;
+	t_display	*d;
+	t_disp_bundle	*db;
+	int		x;
+	int		y;
+	int		n_div;
 
-	y = -1;
-	while (++y < d->win_height)
+	db = (t_disp_bundle*)param;
+	d = db->d;
+	y = db->y_min;
+	while (y < db->y_max)
 	{
 		x = -1;
 		while (++x < d->win_width)
@@ -76,7 +80,7 @@ void	julia(t_display *d)
 			else
 				image_put_pixel(d, x, y, BLACK);
 		}
+		y++;
 	}
-	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
-	return ;
+	pthread_exit(NULL);
 }

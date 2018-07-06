@@ -72,7 +72,7 @@ void	check_params(int ac, char **av, t_display *d)
 			else if (av[i][1] == 'j')
 			{
 				d->init_fractal = &init_julia;
-//				d->display_fractal = &julia;
+				d->display_fractal = &julia;
 			}
 			else if (av[i][1] == 'm')
 			{
