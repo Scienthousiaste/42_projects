@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:30:59 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/08 19:29:52 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/08 22:20:14 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_complex	c_exp(t_complex c)
 
 	r = exp(c.re);
 	ret.re = r * cos(c.im);
-	ret.im = r * cos(c.im);
+	ret.im = r * sin(c.im);
 	return (ret);
 }
 
@@ -48,7 +48,9 @@ t_complex	c_minus(t_complex c)
 
 t_complex	c_cos(t_complex c)
 {
-	return (c_scalar_mult(c_add(c_exp(c_mult_i(c)), c_exp(c_mult_i(c_minus(c)))), 0.5));
+	return (c_scalar_mult(
+				c_add(c_exp(c_mult_i(c)), c_exp(c_mult_i(c_minus(c)))),
+			0.5));
 }
 
 double		modulus(t_complex c)

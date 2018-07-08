@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:31:19 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/08 20:41:11 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/08 22:26:00 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 
 # define DEFAULT_JULIA_RE 0.285
 # define DEFAULT_JULIA_IM 0.013
+# define DEFAULT_COLLATZ_PARAM 10000
 # define DEFAULT_WIN_WIDTH_J 600
 # define DEFAULT_WIN_HEIGHT_J 600
 # define DEFAULT_WIN_WIDTH_M 1000
@@ -94,6 +95,7 @@ typedef struct	s_display
 
 	t_complex	julia_param;
 	int			julia_param_modif;
+	double		collatz_param;
 	int			zoom_button;
 	int			no_zoom;
 }				t_display;
@@ -113,6 +115,7 @@ t_complex		c_init(double r, double i);
 t_complex		c_add_re(t_complex a, double to_add);
 t_complex		c_scalar_mult(t_complex a, double scalar);
 t_complex		c_cos(t_complex c);
+t_complex		c_exp(t_complex c);
 void			c_print(t_complex c);
 double			squared_modulus(t_complex c);
 
@@ -124,6 +127,7 @@ void			init_julia(t_display *d);
 void			*julia(void *d);
 void			init_collatz(t_display *d);
 void			*collatz(void* param);
+void			collatz_comp_values(t_display *d, int x, int y);
 
 void			refresh_screen(t_display *d, int opt);
 void			compute_coordinates_map(t_display *d);

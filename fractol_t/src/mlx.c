@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 11:10:03 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/08 20:30:52 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/08 22:09:31 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		deal_mouse(int button, int x, int y, void *param)
 	t_display *d;
 
 	d = (t_display*)param;
-	printf("button %d, x %d, y %d\n", button, x, y);
 	if (button == d->zoom_button && !(d->no_zoom))
 	{
 		click_zoom(d, x, y);
@@ -43,14 +42,6 @@ int		deal_mouse(int button, int x, int y, void *param)
 		dezoom(d, x, y);
 		refresh_screen(d, RECOMPUTE_COORD);
 	}
-	/*
-	if (d->display_fractal == &julia && d->julia_param_modif 
-		&& x > 0 && x < d->win_width && y > 0 && y < d->win_height)
-	{
-		d->julia_param = d->map[y][x].z;
-		refresh_screen(d, RECOMPUTE_COORD);
-	}
-	*/
 	return (0);
 }
 

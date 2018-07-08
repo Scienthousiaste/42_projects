@@ -6,13 +6,13 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 20:49:39 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/08 20:49:41 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/08 22:24:25 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		collatz_diverge(t_pixel *p, int n_iter)
+int		collatz_diverge(t_pixel *p, int n_iter, double collatz_max)
 {
 	int			i;
 	t_complex	z;
@@ -32,15 +32,13 @@ int		collatz_diverge(t_pixel *p, int n_iter)
 			return (p->n_iter_div);
 		i = (p->n_iter_value == 0) ? 0 : p->n_iter_value;
 	}
-//	z = (p->n_iter_value == 0) ? c_init(0, 0) : p->z_value;
 	z = (p->n_iter_value == 0) ? p->z : p->z_value;
 	while (++i <= n_iter)
 	{
 		z = c_sub(c_add_re(c_scalar_mult(z, 7), 2),
 			c_mult(c_add_re(c_scalar_mult(z, 5), 2), c_cos((c_scalar_mult(z, M_PI)))));
-		z = c_scalar_mult(z, 1/4);
-
-		if (squared_modulus(z) > 10)
+		z = c_scalar_mult(z, 0.25);
+		if (squared_modulus(z) > collatz_max)
 		{
 			p->n_iter_div = i;
 			return (i);
@@ -62,6 +60,7 @@ void	init_collatz(t_display *d)
 	d->y_min = -2;
 	d->y_max = 2;
 	d->no_zoom = 0;
+	d->collatz_param = DEFAULT_COLLATZ_PARAM;
 }
 
 void	*collatz(void *param)
@@ -80,7 +79,7 @@ void	*collatz(void *param)
 		x = -1;
 		while (++x < d->win_width)
 		{
-			if ((n_div = collatz_diverge(&(d->map[y][x]), d->n_iter)))
+			if ((n_div = collatz_diverge(&(d->map[y][x]), d->n_iter, d->collatz_param)))
 				image_put_pixel(d, x, y, find_color(d, n_div));
 			else
 				image_put_pixel(d, x, y, BLACK);
