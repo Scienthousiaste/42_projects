@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:31:19 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/01 17:34:22 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/08 20:41:11 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define DEFAULT_WIN_HEIGHT_J 600
 # define DEFAULT_WIN_WIDTH_M 1000
 # define DEFAULT_WIN_HEIGHT_M 600
+# define DEFAULT_WIN_WIDTH_C 1000
+# define DEFAULT_WIN_HEIGHT_C 400
 
 # define N_ITER_INIT 20
 # define N_COLOR 18
@@ -46,6 +48,8 @@
 # define MAX_WIN_WIDTH 3000
 # define MAX_WIN_HEIGHT 1800
 # define NB_THREAD 4
+
+# define LARGE_INC 20
 
 # define WIN_TITLE "Fract'Ol"
 
@@ -89,7 +93,9 @@ typedef struct	s_display
 	t_pixel		**map;
 
 	t_complex	julia_param;
-	int		julia_param_modif;
+	int			julia_param_modif;
+	int			zoom_button;
+	int			no_zoom;
 }				t_display;
 
 typedef struct	s_disp_bundle
@@ -97,13 +103,16 @@ typedef struct	s_disp_bundle
 	t_display	*d;
 	int			y_min;
 	int			y_max;
-	//pthread_mutex_t mutex;
 }				t_disp_bundle;
 
 int				compute_mandelbrot_values(t_complex c, int n_iter);
 t_complex		c_add(t_complex a, t_complex b);
+t_complex		c_sub(t_complex a, t_complex b);
 t_complex 		c_mult(t_complex a, t_complex b);
 t_complex		c_init(double r, double i);
+t_complex		c_add_re(t_complex a, double to_add);
+t_complex		c_scalar_mult(t_complex a, double scalar);
+t_complex		c_cos(t_complex c);
 void			c_print(t_complex c);
 double			squared_modulus(t_complex c);
 
@@ -113,17 +122,22 @@ void			init_mandelbrot(t_display *d);
 void			*mandelbrot(void* param);
 void			init_julia(t_display *d);
 void			*julia(void *d);
+void			init_collatz(t_display *d);
+void			*collatz(void* param);
 
 void			refresh_screen(t_display *d, int opt);
 void			compute_coordinates_map(t_display *d);
 void			init_display(t_display *d);
 void			click_zoom(t_display *d, int x, int y);
+void			dezoom(t_display *d, int x, int y);
+void			recenter(t_display *d);
 
 void			image_put_pixel(t_display *d, int x, int y, int color);
 
 void			error(int err);
 int				deal_key(int key, void *param);
 int				deal_mouse(int button, int x, int y, void *param);
+int				change_julia_param(int x, int y, void *param);
 
 int				find_color(t_display *d, int n_div);
 void			build_color_palette(t_display *d);

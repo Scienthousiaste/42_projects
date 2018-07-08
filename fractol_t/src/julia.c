@@ -6,13 +6,27 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:44:31 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/30 18:02:52 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/08 20:45:23 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 // utiliser : http://maths.wikidot.com/mandelbrot-et-julia
+
+int		change_julia_param(int x, int y, void* param)
+{
+	t_display *d;
+
+	d = (t_display*)param;
+	if (d->julia_param_modif && x > 0
+			&& x < d->win_width && y > 0 && y < d->win_height)
+	{
+		d->julia_param = d->map[y][x].z;
+		refresh_screen(d, RECOMPUTE_COORD);
+	}
+	return (0);
+}
 
 int		julia_diverge(t_pixel *p, int n_iter, t_complex julia_param)
 {
@@ -54,7 +68,7 @@ void	init_julia(t_display *d)
 	d->x_min = -2;
 	d->x_max = 2;
 	d->y_min = -2;
-	d->y_max = 2;	
+	d->y_max = 2;
 	d->julia_param = c_init(DEFAULT_JULIA_RE, DEFAULT_JULIA_IM);
 }
 
@@ -75,7 +89,7 @@ void	*julia(void *param)
 		while (++x < d->win_width)
 		{
 			if ((n_div = julia_diverge(&(d->map[y][x]), d->n_iter,
-				d->julia_param)))
+							d->julia_param)))
 				image_put_pixel(d, x, y, find_color(d, n_div));
 			else
 				image_put_pixel(d, x, y, BLACK);

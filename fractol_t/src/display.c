@@ -6,11 +6,48 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 11:17:54 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/30 16:42:05 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/08 20:48:22 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	recenter(t_display *d)
+{
+	double size_x;
+	double size_y;
+
+	size_x = (d->map[d->win_height - 1][d->win_width - 1].z.re) 
+		- (d->map[0][0].z.re);
+	size_y = (d->map[d->win_height - 1][d->win_width - 1].z.im)
+		- (d->map[0][0].z.im);
+	d->x_min = -(size_x / 2); 
+	d->x_max = size_x / 2;
+	d->y_min = -(size_y / 2);
+	d->y_max = size_y / 2;
+}
+
+void	dezoom(t_display *d, int x, int y)
+{
+	double new_x_center;
+	double new_y_center;
+	double size_x;
+	double size_y;
+
+	new_x_center = (d->map[y][x]).z.re;
+	new_y_center = (d->map[y][x]).z.im;
+	size_x = (d->map[d->win_height - 1][d->win_width - 1].z.re) 
+		- (d->map[0][0].z.re);
+	size_y = (d->map[d->win_height - 1][d->win_width - 1].z.im)
+		- (d->map[0][0].z.im);
+	if (size_x > 100)
+		return ;
+	d->x_min = new_x_center - size_x; 
+	d->x_max = new_x_center + size_x;
+	d->y_min = new_y_center - size_y;
+	d->y_max = new_y_center + size_y;
+	printf("x min %.12f max %.12f\ny min %.12f, max %.12f\n\n", d->x_min, d->x_max, d->y_min, d->y_max);//
+}
 
 void	click_zoom(t_display *d, int x, int y)
 {
@@ -117,4 +154,6 @@ void	init_display(t_display *d)
 		error(MALLOC_ERROR);
 	compute_coordinates_map(d);	
 	d->julia_param_modif = 1;
+	d->zoom_button = MOUSE_SCROLL_IN;
+	d->no_zoom = 0;
 }

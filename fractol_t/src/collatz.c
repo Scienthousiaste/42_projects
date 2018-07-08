@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   collatz.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/08 20:49:39 by tbehra            #+#    #+#             */
+/*   Updated: 2018/07/08 20:49:41 by tbehra           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 int		collatz_diverge(t_pixel *p, int n_iter)
@@ -20,13 +32,15 @@ int		collatz_diverge(t_pixel *p, int n_iter)
 			return (p->n_iter_div);
 		i = (p->n_iter_value == 0) ? 0 : p->n_iter_value;
 	}
-	z = (p->n_iter_value == 0) ? c_init(0, 0) : p->z_value;
+//	z = (p->n_iter_value == 0) ? c_init(0, 0) : p->z_value;
+	z = (p->n_iter_value == 0) ? p->z : p->z_value;
 	while (++i <= n_iter)
 	{
-		z = c_add(c_mult(z, z), c);
-		
-		1/4 * ( 1 + 4 * z - (1 + 2 * z) * cos(pi * z));
-		if (squared_modulus(z) >= 4)
+		z = c_sub(c_add_re(c_scalar_mult(z, 7), 2),
+			c_mult(c_add_re(c_scalar_mult(z, 5), 2), c_cos((c_scalar_mult(z, M_PI)))));
+		z = c_scalar_mult(z, 1/4);
+
+		if (squared_modulus(z) > 10)
 		{
 			p->n_iter_div = i;
 			return (i);
@@ -40,13 +54,14 @@ int		collatz_diverge(t_pixel *p, int n_iter)
 void	init_collatz(t_display *d)
 {
 	d->win_width = (d->win_width != 0) ?
-		d->win_width : DEFAULT_WIN_WIDTH_M;
+		d->win_width : DEFAULT_WIN_WIDTH_C;
 	d->win_height = (d->win_height != 0) ?
-		d->win_height : DEFAULT_WIN_HEIGHT_M;
-	d->x_min = -2;
-	d->x_max = 1;
-	d->y_min = -1;
-	d->y_max = 1;
+		d->win_height : DEFAULT_WIN_HEIGHT_C;
+	d->x_min = -5;
+	d->x_max = 5;
+	d->y_min = -2;
+	d->y_max = 2;
+	d->no_zoom = 0;
 }
 
 void	*collatz(void *param)

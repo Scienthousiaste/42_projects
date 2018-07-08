@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:48:46 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/01 17:43:56 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/08 20:44:41 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	error(int err)
 {
 	const int nb_err = 4;
 	const char *err_msg[nb_err] =
-		{"Erreur.", "Erreur de malloc.", "Option invalide.",
+	{"Erreur.", "Erreur de malloc.", "Option invalide.",
 		"Taille de fenêtre invalide."};
-	
+
 	if (err < 0 || err > nb_err)
 		exit(1);
 	ft_putendl(err_msg[err]);
@@ -39,6 +39,8 @@ void	usage(void)
 	ft_putendl("Usage: fractol [-m | -j [-w width height]]"); 
 	ft_putendl("\t-m for Mandelbrot set");
 	ft_putendl("\t-j for Julia set");
+	ft_putendl("\t-c for Collatz fractal");
+	ft_putendl("During execution, use F to fix Julia's parameter, Z to toggle zoom, R to recenter, C to use clicks to zoom instead of scrolling.\n");
 	exit(0);
 }
 
@@ -53,7 +55,7 @@ int		get_window_size(int ac, char **av, int i, t_display *d)
 		error(INVALID_WINDOW_SIZE);
 	d->win_height = ft_atoi(av[i + 2]);
 	if (d->win_width > MAX_WIN_WIDTH || d->win_width < MIN_WIN_WIDTH
-		|| d->win_height > MAX_WIN_HEIGHT || d->win_height < MIN_WIN_HEIGHT)
+			|| d->win_height > MAX_WIN_HEIGHT || d->win_height < MIN_WIN_HEIGHT)
 		error(INVALID_WINDOW_SIZE);
 	return (2);
 }
@@ -67,6 +69,8 @@ void	check_params(int ac, char **av, t_display *d)
 	{
 		if (av[i][0] == '-')
 		{
+			if (av[i][2] != '\0')
+				usage();
 			if (av[i][1] == 'w')
 				i += get_window_size(ac, av, i, d);
 			else if (av[i][1] == 'j')
@@ -78,6 +82,11 @@ void	check_params(int ac, char **av, t_display *d)
 			{
 				d->init_fractal = &init_mandelbrot;
 				d->display_fractal = &mandelbrot;
+			}
+			else if (av[i][1] == 'c')
+			{
+				d->init_fractal = &init_collatz;
+				d->display_fractal = &collatz;
 			}
 			else
 				usage();
@@ -102,6 +111,8 @@ int main(int ac, char **av)
 	display_complex_fractal(&d);
 	mlx_key_hook(d.win, &deal_key, &d);
 	mlx_mouse_hook(d.win, &deal_mouse, &d);
+	if (d.display_fractal == &julia)
+		mlx_hook(d.win, MOTION_NOTIFY, 64, &change_julia_param, &d);
 	mlx_loop(d.mlx);
 	return (0);
 }
