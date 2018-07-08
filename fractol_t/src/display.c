@@ -116,4 +116,5 @@ void	init_display(t_display *d)
 	if (!(d->map = (t_pixel**)malloc(sizeof(t_pixel*) * d->win_height)))
 		error(MALLOC_ERROR);
 	compute_coordinates_map(d);	
+	d->julia_param_modif = 1;
 }

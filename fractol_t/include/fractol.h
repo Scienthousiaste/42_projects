@@ -89,6 +89,7 @@ typedef struct	s_display
 	t_pixel		**map;
 
 	t_complex	julia_param;
+	int		julia_param_modif;
 }				t_display;
 
 typedef struct	s_disp_bundle

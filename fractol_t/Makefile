@@ -23,7 +23,7 @@ INCDIR	= include
 SRC		= main.c complex.c mandelbrot.c mlx.c display.c images.c colors.c \
 		  utils.c julia.c complex_fractals.c
 
-HEAD	= fractol.h libft.h
+HEAD	= fractol.h libft.h display.h
 
 OBJ		= $(SRC:.c=.o)
 

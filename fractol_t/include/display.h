@@ -28,6 +28,7 @@
 # define KEY_D 2
 # define KEY_I 34
 # define KEY_G 5
+# define KEY_F 3
 
 # define BLUE 0xFF
 # define GREEN 0xFF00
