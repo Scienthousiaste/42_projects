@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:31:19 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/08 22:26:00 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/09 15:26:34 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 # define DEFAULT_WIN_HEIGHT_J 600
 # define DEFAULT_WIN_WIDTH_M 1000
 # define DEFAULT_WIN_HEIGHT_M 600
-# define DEFAULT_WIN_WIDTH_C 1000
-# define DEFAULT_WIN_HEIGHT_C 400
+# define DEFAULT_WIN_WIDTH_C 1500
+# define DEFAULT_WIN_HEIGHT_C 600
 
 # define N_ITER_INIT 20
 # define N_COLOR 18
@@ -48,7 +48,7 @@
 # define MIN_WIN_HEIGHT 40
 # define MAX_WIN_WIDTH 3000
 # define MAX_WIN_HEIGHT 1800
-# define NB_THREAD 4
+# define NB_THREAD 100
 
 # define LARGE_INC 20
 
@@ -128,6 +128,8 @@ void			*julia(void *d);
 void			init_collatz(t_display *d);
 void			*collatz(void* param);
 void			collatz_comp_values(t_display *d, int x, int y);
+void			rotate_collatz_param(t_display *d);
+void			translation(t_display *d, int key);
 
 void			refresh_screen(t_display *d, int opt);
 void			compute_coordinates_map(t_display *d);

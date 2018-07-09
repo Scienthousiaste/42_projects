@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 17:49:03 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/08 20:20:57 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/09 15:25:57 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define KEY_I 34
 # define KEY_INF_TO 43
 # define KEY_SUP_TO 47
+# define KEY_PLUS 69
+# define KEY_MINUS 78
 
 # define MOUSE_CLICK 1
 # define MOUSE_SCROLL_IN 5

@@ -6,19 +6,21 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:48:46 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/08 21:08:45 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/09 18:15:52 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 /*
- * A faire
- *
+ * A FAIRE
+ * 		norme
+ * 		PROBLEME COLLATZ et couleurs quand je change le nombre d'iterations depuis que jai ajouté le init_pixel
+ *		"PLEIN DE FRACTALES". Buddabrot, burning ship?
+ *		changement de couleurs
+ *		3D... how?
  * Buddhabrot https://fr.wikipedia.org/wiki/Buddhabrot
- * Fractales 3D ?
- * MULITHREADING
- * utiliser la carte graphique : https://fr.wikipedia.org/wiki/OpenCL
+ * utiliser la carte graphique ? : https://fr.wikipedia.org/wiki/OpenCL
  */
 
 void	error(int err)
@@ -40,7 +42,9 @@ void	usage(void)
 	ft_putendl("\t-m for Mandelbrot set");
 	ft_putendl("\t-j for Julia set");
 	ft_putendl("\t-c for Collatz fractal");
-	ft_putendl("During execution, use F to fix Julia's parameter, Z to toggle zoom, R to recenter, C to use clicks to zoom instead of scrolling.\n");
+	ft_putendl("\t-b for Buddhabrot fractal");
+	ft_putendl("During execution, use F to fix Julia's parameter, Z to toggle ");
+	ft_putendl("zoom, R to recenter, C to use clicks to zoom instead of scrolling.\n");
 	exit(0);
 }
 
