@@ -6,13 +6,13 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 17:14:29 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/08 17:03:58 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/24 20:07:23 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void    init_threads(t_disp_bundle *db, t_display *d)
+void	init_threads(t_disp_bundle *db, t_display *d)
 {
 	int n_thread;
 
@@ -34,11 +34,11 @@ void    init_threads(t_disp_bundle *db, t_display *d)
 	}
 }
 
-void    display_complex_fractal(t_display *d)
+void	display_complex_fractal(t_display *d)
 {
-	pthread_t       *thread;
-	t_disp_bundle   *db;
-	int             n_thread;
+	pthread_t		*thread;
+	t_disp_bundle	*db;
+	int				n_thread;
 
 	if (!(thread = (pthread_t*)malloc(sizeof(pthread_t) * NB_THREAD)))
 		error(MALLOC_ERROR);

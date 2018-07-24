@@ -6,15 +6,13 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:44:31 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/08 21:05:12 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/24 15:30:49 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-// utiliser : http://maths.wikidot.com/mandelbrot-et-julia
-
-int		change_julia_param(int x, int y, void* param)
+int		change_julia_param(int x, int y, void *param)
 {
 	t_display *d;
 
@@ -30,12 +28,11 @@ int		change_julia_param(int x, int y, void* param)
 
 int		julia_diverge(t_pixel *p, int n_iter, t_complex julia_param)
 {
-	int i;
-	t_complex z;
+	int			i;
+	t_complex	z;
 
-	if (p->n_iter_value > n_iter)
+	if (p->n_iter_value > n_iter && (i = 0))
 	{
-		i = 0;
 		p->n_iter_value = 0;
 		p->n_iter_div = 0;
 		p->z_value = p->z;
@@ -50,11 +47,8 @@ int		julia_diverge(t_pixel *p, int n_iter, t_complex julia_param)
 	while (++i <= n_iter)
 	{
 		z = c_add(c_mult(z, z), julia_param);
-		if (squared_modulus(z) >= 4)
-		{
-			p->n_iter_div = i;
+		if (squared_modulus(z) >= 4 && (p->n_iter_div = i))
 			return (i);
-		}
 	}
 	p->z_value = z;
 	p->n_iter_value = n_iter;
@@ -74,11 +68,11 @@ void	init_julia(t_display *d)
 
 void	*julia(void *param)
 {
-	t_display	*d;
+	t_display		*d;
 	t_disp_bundle	*db;
-	int		x;
-	int		y;
-	int		n_div;
+	int				x;
+	int				y;
+	int				n_div;
 
 	db = (t_disp_bundle*)param;
 	d = db->d;

@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 13:39:07 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/29 14:58:04 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/24 15:27:56 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	fill_img(void *img_to_fill, int color, t_display *d)
 	}
 }
 
-void    image_put_pixel(t_display *d, int x, int y, int color)
+void	image_put_pixel(t_display *d, int x, int y, int color)
 {
-	int		pos;
-	
+	int	pos;
+
 	pos = (y * d->size_line + x * sizeof(int));
 	*(d->img_ptr + pos) = (char)(color & 0xFF);
 	*(d->img_ptr + pos + 1) = (char)(color >> 8 & 0xFF);

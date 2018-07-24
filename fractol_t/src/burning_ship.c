@@ -1,36 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   burning_ship.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/25 17:56:30 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/24 14:57:54 by tbehra           ###   ########.fr       */
+/*   Created: 2018/07/23 19:49:19 by tbehra            #+#    #+#             */
+/*   Updated: 2018/07/24 18:52:03 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		init_i(int *i, t_pixel *p, int n_iter)
-{
-	if (p->n_iter_value > n_iter)
-	{
-		*i = 0;
-		p->n_iter_value = 0;
-		p->n_iter_div = 0;
-		p->z_value = p->z;
-	}
-	else
-	{
-		if (p->n_iter_div)
-			return (0);
-		*i = (p->n_iter_value == 0) ? 0 : p->n_iter_value;
-	}
-	return (1);
-}
-
-int		mandelbrot_diverge(t_pixel *p, int n_iter)
+int		burning_diverge(t_pixel *p, int n_iter)
 {
 	int			i;
 	t_complex	z;
@@ -42,6 +24,7 @@ int		mandelbrot_diverge(t_pixel *p, int n_iter)
 	z = (p->n_iter_value == 0) ? c_init(0, 0) : p->z_value;
 	while (++i <= n_iter)
 	{
+		z = c_abs(z);
 		z = c_add(c_mult(z, z), c);
 		if (squared_modulus(z) >= 4)
 		{
@@ -54,19 +37,19 @@ int		mandelbrot_diverge(t_pixel *p, int n_iter)
 	return (0);
 }
 
-void	init_mandelbrot(t_display *d)
+void	init_burning_ship(t_display *d)
 {
 	d->win_width = (d->win_width != 0) ?
-		d->win_width : DEFAULT_WIN_WIDTH_M;
+		d->win_width : DEFAULT_WIN_WIDTH_B;
 	d->win_height = (d->win_height != 0) ?
-		d->win_height : DEFAULT_WIN_HEIGHT_M;
-	d->x_min = -2;
-	d->x_max = 1;
-	d->y_min = -1;
+		d->win_height : DEFAULT_WIN_HEIGHT_B;
+	d->x_min = -3;
+	d->x_max = 2;
+	d->y_min = -2;
 	d->y_max = 1;
 }
 
-void	*mandelbrot(void *param)
+void	*burning_ship(void *param)
 {
 	t_display		*d;
 	t_disp_bundle	*db;
@@ -82,7 +65,7 @@ void	*mandelbrot(void *param)
 		x = -1;
 		while (++x < d->win_width)
 		{
-			if ((n_div = mandelbrot_diverge(&(d->map[y][x]), d->n_iter)))
+			if ((n_div = burning_diverge(&(d->map[y][x]), d->n_iter)))
 				image_put_pixel(d, x, y, find_color(d, n_div));
 			else
 				image_put_pixel(d, x, y, BLACK);

@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 11:17:54 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/09 15:48:20 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/24 15:54:34 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,16 @@ void	click_zoom(t_display *d, int x, int y)
 	d->y_max = (d->map[new_max_y][new_max_x]).z.im;
 }
 
-
 void	compute_coordinates(t_display *d)
 {
-	int		i;
-	int		j;
-	double	proportion_x;
-	double	proportion_y;
-	double	x_inc;
-	double	y_inc;
+	int			i;
+	int			j;
+	double		proportion_x;
+	double		proportion_y;
+	t_complex	inc;
 
-	x_inc = (double)((double)1 / (double)d->win_width);
-	y_inc = (double)((double)1 / (double)d->win_height);
+	inc.re = (double)((double)1 / (double)d->win_width);
+	inc.im = (double)((double)1 / (double)d->win_height);
 	proportion_y = 0;
 	i = 0;
 	while (++i <= d->win_height)
@@ -79,11 +77,12 @@ void	compute_coordinates(t_display *d)
 		{
 			ft_bzero((void*)&(d->map[i - 1][j - 1]), sizeof(t_pixel));
 			(&(d->map[i - 1][j - 1]))->z =
-				c_init((double)((d->x_max - d->x_min) * proportion_x + d->x_min),
-					(double)((d->y_max - d->y_min) * proportion_y + d->y_min));
-			proportion_x += x_inc;
+				c_init((double)((d->x_max - d->x_min) *
+				proportion_x + d->x_min), (double)((d->y_max - d->y_min) *
+				proportion_y + d->y_min));
+			proportion_x += inc.re;
 		}
-		proportion_y += y_inc;
+		proportion_y += inc.im;
 	}
 }
 
@@ -94,22 +93,15 @@ void	malloc_and_compute_coordinates_map(t_display *d)
 	i = 0;
 	while (++i <= d->win_height)
 	{
-		if (!(d->map[i - 1] = (t_pixel*)malloc(sizeof(t_pixel) * d->win_width)))
+		if (!(d->map[i - 1] = (t_pixel*)ft_memalloc(sizeof(t_pixel) *
+				d->win_width)))
 			error(MALLOC_ERROR);
 	}
 	compute_coordinates(d);
 }
 
-void	refresh_screen(t_display *d, int opt)
-{
-	if (opt == RECOMPUTE_COORD)
-		compute_coordinates(d);
-	mlx_clear_window(d->mlx, d->win);
-	display_complex_fractal(d);
-}
-
 void	init_display(t_display *d)
-{	
+{
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, d->win_width, d->win_height, WIN_TITLE);
 	d->n_iter = N_ITER_INIT;
@@ -119,7 +111,7 @@ void	init_display(t_display *d)
 	build_color_palette(d);
 	if (!(d->map = (t_pixel**)malloc(sizeof(t_pixel*) * d->win_height)))
 		error(MALLOC_ERROR);
-	malloc_and_compute_coordinates_map(d);	
+	malloc_and_compute_coordinates_map(d);
 	d->julia_param_modif = 1;
 	d->zoom_button = MOUSE_SCROLL_IN;
 	d->no_zoom = 0;

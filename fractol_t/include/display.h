@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 17:49:03 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/09 15:25:57 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/24 19:14:18 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@
 # define KEY_X 7
 # define KEY_C 8
 # define KEY_I 34
+# define KEY_P 35
+# define KEY_M 46
 # define KEY_INF_TO 43
 # define KEY_SUP_TO 47
 # define KEY_PLUS 69
+# define KEY_NUMPAD_ENTER 76
 # define KEY_MINUS 78
 
 # define MOUSE_CLICK 1
@@ -68,6 +71,10 @@
 # define RED_6 0x310000
 # define RED_7 0x150000
 
+# define MASK_RED 0x110000
+# define MASK_GREEN 0x001100
+# define MASK_BLUE 0x000011
+# define MASK_GRAY 0x111111
 # define MOTION_NOTIFY 6
 
 # define TEXT_COLOR WHITE

@@ -6,13 +6,13 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 15:28:36 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/09 15:42:05 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/24 15:47:48 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void    recenter(t_display *d)
+void	recenter(t_display *d)
 {
 	double size_x;
 	double size_y;
@@ -39,16 +39,20 @@ void	translation(t_display *d, int key)
 	if (key == LEFT_ARROW_KEY || key == RIGHT_ARROW_KEY)
 	{
 		d->x_min = (key == LEFT_ARROW_KEY) ?
-			d->x_min - 0.25 * size_x : d->x_min + 0.25 * size_x;
+			d->x_min - TRANSLATION_FACTOR * size_x :
+			d->x_min + TRANSLATION_FACTOR * size_x;
 		d->x_max = (key == LEFT_ARROW_KEY) ?
-			d->x_max - 0.25 * size_x : d->x_max + 0.25 * size_x;
+			d->x_max - TRANSLATION_FACTOR * size_x :
+			d->x_max + TRANSLATION_FACTOR * size_x;
 	}
 	if (key == DOWN_ARROW_KEY || key == UP_ARROW_KEY)
 	{
 		d->y_min = (key == UP_ARROW_KEY) ?
-			d->y_min - 0.25 * size_y : d->y_min + 0.25 * size_y;
+			d->y_min - TRANSLATION_FACTOR * size_y :
+			d->y_min + TRANSLATION_FACTOR * size_y;
 		d->y_max = (key == UP_ARROW_KEY) ?
-			d->y_max - 0.25 * size_y : d->y_max + 0.25 * size_y;
+			d->y_max - TRANSLATION_FACTOR * size_y :
+			d->y_max + TRANSLATION_FACTOR * size_y;
 	}
 }
 
@@ -62,4 +66,12 @@ void	free_map(t_display *d)
 		free(d->map[i - 1]);
 	}
 	free(d->map);
+}
+
+void	refresh_screen(t_display *d, int opt)
+{
+	if (opt == RECOMPUTE_COORD)
+		compute_coordinates(d);
+	mlx_clear_window(d->mlx, d->win);
+	display_complex_fractal(d);
 }

@@ -6,13 +6,13 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 20:49:39 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/09 18:01:49 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/10 14:54:40 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		collatz_init_pixel(t_pixel *p, int n_iter)
+int		collatz_init_pixel(t_pixel *p, int n_iter, int *ret_val)
 {
 	int i;
 
@@ -26,7 +26,10 @@ int		collatz_init_pixel(t_pixel *p, int n_iter)
 	else
 	{
 		if (p->n_iter_div)
-			return (p->n_iter_div);
+		{
+			*ret_val = p->n_iter_div;
+			return (-1);
+		}
 		i = (p->n_iter_value == 0) ? 0 : p->n_iter_value;
 	}
 	return (i);
@@ -35,11 +38,15 @@ int		collatz_init_pixel(t_pixel *p, int n_iter)
 int		collatz_diverge(t_pixel *p, int n_iter, double collatz_max)
 {
 	int			i;
+	int			ret_val;
 	t_complex	z;
 	t_complex	c;
 
+	ret_val = 0;
 	c = p->z;
-	i = collatz_init_pixel(p, n_iter);
+	i = collatz_init_pixel(p, n_iter, &ret_val);
+	if (i == -1)
+		return (ret_val);
 	z = (p->n_iter_value == 0) ? p->z : p->z_value;
 	while (++i <= n_iter)
 	{

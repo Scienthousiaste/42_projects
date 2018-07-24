@@ -6,27 +6,23 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 17:48:46 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/09 18:15:52 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/24 19:10:18 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 /*
- * A FAIRE
- * 		norme
- * 		PROBLEME COLLATZ et couleurs quand je change le nombre d'iterations depuis que jai ajouté le init_pixel
- *		"PLEIN DE FRACTALES". Buddabrot, burning ship?
- *		changement de couleurs
- *		3D... how?
- * Buddhabrot https://fr.wikipedia.org/wiki/Buddhabrot
- * utiliser la carte graphique ? : https://fr.wikipedia.org/wiki/OpenCL
- */
+** A FAIRE
+**		"PLEIN DE FRACTALES". Buddabrot, autres sur le fractalforums ?
+**		changement de couleurs
+**		 Buddhabrot https://fr.wikipedia.org/wiki/Buddhabrot
+*/
 
 void	error(int err)
 {
-	const int nb_err = 4;
-	const char *err_msg[nb_err] =
+	const int	nb_err = 4;
+	const char	*err_msg[nb_err] =
 	{"Erreur.", "Erreur de malloc.", "Option invalide.",
 		"Taille de fenêtre invalide."};
 
@@ -38,13 +34,19 @@ void	error(int err)
 
 void	usage(void)
 {
-	ft_putendl("Usage: fractol [-m | -j [-w width height]]"); 
+	ft_putendl("Usage: fractol [-m | -j [-w width height]]");
 	ft_putendl("\t-m for Mandelbrot set");
 	ft_putendl("\t-j for Julia set");
 	ft_putendl("\t-c for Collatz fractal");
-	ft_putendl("\t-b for Buddhabrot fractal");
-	ft_putendl("During execution, use F to fix Julia's parameter, Z to toggle ");
-	ft_putendl("zoom, R to recenter, C to use clicks to zoom instead of scrolling.\n");
+	ft_putendl("\t-b for burning ship fractal");
+	ft_putendl("\t-u for Buddhabrot fractal");
+	ft_putstr("During execution, use :\n\tF ");
+	ft_putstr("to fix Julia's parameter\n\tZ to toggle ");
+	ft_putstr("zoom\n\tC to recenter\n\tM to toggle using clicks to");
+	ft_putstr("zoom instead of scrolling\n\tR, G, B, W for red, green, blue");
+	ft_putstr(", B&W monochromes\n\tP to use the default palette\n\tArrows to");
+	ft_putstr(" move around\n\t< and > to increase/decrease iterations by 20");
+	ft_putendl("\n\tKeypad's + and - to increase/decrease iterations by 1");
 	exit(0);
 }
 
@@ -64,43 +66,7 @@ int		get_window_size(int ac, char **av, int i, t_display *d)
 	return (2);
 }
 
-void	check_params(int ac, char **av, t_display *d)
-{
-	int i;
-
-	i = 0;
-	while (++i < ac)
-	{
-		if (av[i][0] == '-')
-		{
-			if (av[i][2] != '\0')
-				usage();
-			if (av[i][1] == 'w')
-				i += get_window_size(ac, av, i, d);
-			else if (av[i][1] == 'j')
-			{
-				d->init_fractal = &init_julia;
-				d->display_fractal = &julia;
-			}
-			else if (av[i][1] == 'm')
-			{
-				d->init_fractal = &init_mandelbrot;
-				d->display_fractal = &mandelbrot;
-			}
-			else if (av[i][1] == 'c')
-			{
-				d->init_fractal = &init_collatz;
-				d->display_fractal = &collatz;
-			}
-			else
-				usage();
-		}
-		else
-			usage();
-	}
-}
-
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_display	d;
 

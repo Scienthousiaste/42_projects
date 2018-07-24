@@ -6,7 +6,7 @@
 #    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/25 18:21:10 by tbehra            #+#    #+#              #
-#    Updated: 2018/07/09 15:28:23 by tbehra           ###   ########.fr        #
+#    Updated: 2018/07/24 15:40:53 by tbehra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ OBJDIR	= obj
 INCDIR	= include
 
 SRC		= main.c complex.c mandelbrot.c mlx.c display.c images.c colors.c \
-		  display_utils.c julia.c complex_fractals.c collatz.c
+		  display_utils.c julia.c complex_fractals.c collatz.c buddhabrot.c \
+		  burning_ship.c check_params.c complex_angles.c complex_op.c
 
 HEAD	= fractol.h libft.h display.h
 
@@ -35,7 +36,6 @@ INCP	= $(foreach dir, $(INCDIR), -I$(dir))
 
 MLXP	= -I/usr/local/include
 MLX		= -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit
-#MLX	= /Users/timothee/Dev/C/minilibx_macos/libmlx.a
 
 all: $(LIBFT) $(OBJDIR) $(NAME)
 
