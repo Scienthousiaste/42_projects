@@ -1,0 +1,17 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    05                                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/07/28 19:31:45 by tbehra            #+#    #+#              #
+#    Updated: 2018/07/28 20:01:42 by tbehra           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# ping shows the IP address, -t sets a timeout for ping to stop
+# keep result in file t, sed the first line, cut first 2 fields,
+# suppress the :, and remove the file t.
+
+ping slash16.org -t 1 > t && cat t | sed 1,1!d | cut -d ' ' -f2,3 | tr -d ':' && rm t

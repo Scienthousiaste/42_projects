@@ -1,0 +1,17 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    03                                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/07/28 18:49:44 by tbehra            #+#    #+#              #
+#    Updated: 2018/07/28 19:03:36 by tbehra           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# MAC address = physical address = Ethernet address
+# in networksetup we get all the interfaces including Wi-Fi
+# sed to select only the line 8, containing the MAC address
+
+networksetup -listallhardwareports | sed 8,8!d | cut -d ' ' -f3

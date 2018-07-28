@@ -1,0 +1,16 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    04                                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/07/28 19:18:18 by tbehra            #+#    #+#              #
+#    Updated: 2018/07/28 19:23:26 by tbehra           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# netstat -rn shows the routing tables for Internet and Internet6
+# sed 2d to get rid of the second default gateway (Internet6)
+
+netstat -rn | grep default | sed 2d
