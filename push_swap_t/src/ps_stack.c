@@ -6,46 +6,64 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:01:26 by tbehra            #+#    #+#             */
-/*   Updated: 2018/05/31 18:09:46 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/29 16:24:50 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
-t_ps_stack	*ps_new(int value)
+int			ps_max(t_ps_stack *stack)
 {
-	t_ps_stack	*new;
+	int			max;
+	t_ps_stack	*cur;
 
-	if (!(new = (t_ps_stack*)malloc(sizeof(t_ps_stack))))
-		error(MALLOC_ERROR);
-	new->d = value;
-	new->next = NULL;
-	return (new);
+	if (!stack)
+		error(0);
+	max = stack->d;
+	cur = stack;
+	while (cur)
+	{
+		if (cur->d > max)
+			max = cur->d;
+		cur = cur->next;
+	}
+	return (max);
 }
 
-void        build_a(int ac, char **av, t_push_swap *ps)
+int			ps_min(t_ps_stack *stack)
 {
-	int         i;
-	int         val;
-	char        *start;
+	int			min;
+	t_ps_stack	*cur;
 
-	i = 0;
-	ps->a = NULL;
-	while (++i < ac)
+	if (!stack)
+		error(0);
+	min = stack->d;
+	cur = stack;
+	while (cur)
 	{
-		start = av[i];
-		while (*start)
-		{
-			if (!(ft_isdigit(*start) ||
-						((*start == '-') && (*start == av[i][0]))))
-				error(0);
-			start++;
-		}
-		val = ft_atoi(av[i]);
-		if (ps_is_in(ps->a, val))
-			error(0);
-		ps_add_end(&ps->a, val);
+		if (cur->d < min)
+			min = cur->d;
+		cur = cur->next;
 	}
+	return (min);
+}
+
+int			ps_is_sorted(t_ps_stack *stack)
+{
+	t_ps_stack *cur;
+	t_ps_stack *prev;
+
+	prev = NULL;
+	cur = stack;
+	while (cur)
+	{
+		prev = cur;
+		cur = cur->next;
+		if (cur)
+			if ((cur->d) < prev->d)
+				return (0);
+	}
+	return (1);
 }
 
 int			ps_is_in(t_ps_stack *stack, int value)
@@ -78,5 +96,3 @@ void		stack_del(t_ps_stack **s)
 	}
 	*s = NULL;
 }
-
-

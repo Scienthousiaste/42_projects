@@ -6,11 +6,11 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 14:15:08 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/01 19:15:41 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/29 15:47:51 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 int		find_num_inst(char *inst)
 {
@@ -55,7 +55,7 @@ void	build_tab_inst(t_push_swap *ps)
 	ps->operation[RRR] = &rev_rotate_ab;
 }
 
-void    error(int err_nb)
+void	error(int err_nb)
 {
 	if (err_nb == MALLOC_ERROR)
 		write(2, "Malloc error\n", 13);
@@ -64,22 +64,9 @@ void    error(int err_nb)
 	exit(1);
 }
 
-int     sorted_a_and_empty_b(t_push_swap *ps)
+int		sorted_a_and_empty_b(t_push_swap *ps)
 {
-	t_ps_stack *cur;
-	t_ps_stack *prev;
-
-	prev = NULL;
-	if (ps->b)
+	if (ps->b || !ps_is_sorted(ps->a))
 		return (0);
-	cur = ps->a;
-	while (cur)
-	{
-		prev = cur;
-		cur = cur->next;
-		if (cur)
-			if ((cur->d) < prev->d)
-				return (0);
-	}
 	return (1);
 }

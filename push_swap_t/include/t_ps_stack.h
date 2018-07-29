@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 14:03:45 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/01 18:53:57 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/29 15:06:35 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ void					ps_add_end(t_ps_stack **stack, int value);
 void					ps_push(t_ps_stack **stack, int value);
 int						ps_is_in(t_ps_stack *stack, int value);
 void					stack_del(t_ps_stack **stack);
+int						ps_is_sorted(t_ps_stack *stack);
+int						ps_min(t_ps_stack *stack);
+int						ps_max(t_ps_stack *stack);
 
 #endif

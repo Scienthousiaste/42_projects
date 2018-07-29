@@ -6,11 +6,11 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 14:37:27 by tbehra            #+#    #+#             */
-/*   Updated: 2018/05/29 11:28:44 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/29 12:29:46 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 void	swap_a(t_push_swap *ps)
 {

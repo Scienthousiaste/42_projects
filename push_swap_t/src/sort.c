@@ -1,35 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.c                                          :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/29 10:51:57 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/29 12:28:54 by tbehra           ###   ########.fr       */
+/*   Created: 2018/07/29 16:18:55 by tbehra            #+#    #+#             */
+/*   Updated: 2018/07/29 17:19:33 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_stack(t_ps_stack *s)
+int		count_inc_transitions(t_ps_stack *s)
 {
-	t_ps_stack *cur;
+	int			r;
+	t_ps_stack	*cur;
+	t_ps_stack	*prev;
 
+	r = 0;
+	prev = NULL;
 	cur = s;
 	while (cur)
 	{
-		ft_putnbr(cur->d);
-		ft_putchar(' ');
+		prev = cur;
 		cur = cur->next;
+		if (cur)
+			if (cur->d < prev->d)
+				r++;
 	}
-	ft_putchar('\n');
+	if (prev->d < s->d)
+		r++;
+	return (r);
 }
 
-void	show_state(t_push_swap *ps)
+void	rotate_till_finished(t_ps_stack *s)
 {
-	ft_putstr("stack a\n");
-	print_stack(ps->a);
-	ft_putstr("stack b\n");
-	print_stack(ps->b);
+	(void)s;
+}
+
+void	other_sort(t_push_swap *ps)
+{
+	ft_putstr("nb missorted : ");
+	ft_putnbr(count_inc_transitions(ps->a));
+	ft_putchar('\n');
+	if (count_inc_transitions(ps->a) == 1)
+		rotate_till_finished(ps->a);
 }

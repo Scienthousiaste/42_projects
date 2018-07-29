@@ -6,11 +6,11 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 14:51:55 by tbehra            #+#    #+#             */
-/*   Updated: 2018/05/30 14:53:05 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/29 16:22:15 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 int			ps_pop_last(t_ps_stack **stack)
 {
@@ -73,4 +73,15 @@ void		ps_push(t_ps_stack **stack, int value)
 	new = ps_new(value);
 	new->next = *stack;
 	*stack = new;
+}
+
+t_ps_stack	*ps_new(int value)
+{
+	t_ps_stack	*new;
+
+	if (!(new = (t_ps_stack*)malloc(sizeof(t_ps_stack))))
+		error(MALLOC_ERROR);
+	new->d = value;
+	new->next = NULL;
+	return (new);
 }

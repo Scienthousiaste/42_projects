@@ -6,11 +6,11 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 13:44:26 by tbehra            #+#    #+#             */
-/*   Updated: 2018/06/01 18:56:40 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/29 15:24:29 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
 int		main(int ac, char **av)
 {
@@ -18,11 +18,9 @@ int		main(int ac, char **av)
 	char		*inst;
 
 	if (ac < 2)
-		error(NO_ARG_ERROR);
+		return (0);
+	init_ps(&ps);
 	build_a(ac, av, &ps);
-	ps.display = 1;
-	ps.b = NULL;
-	build_tab_inst(&ps);
 	while (get_next_line(1, &inst) == 1)
 	{
 		if (!(do_inst(inst, &ps)))
