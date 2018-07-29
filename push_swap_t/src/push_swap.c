@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 18:58:25 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/29 16:19:47 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/29 19:16:21 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	small_sort_ohter_possibilities(t_push_swap *ps)
 	log_do_inst("rra", ps);
 }
 
-void	small_sort(t_push_swap *ps)
+void	ps_small_sort(t_push_swap *ps)
 {
 	if (ps->nb_elt <= 1)
 		return ;
@@ -94,8 +94,10 @@ int		main(int ac, char **av)
 	build_a(ac, av, &ps);
 	build_tab_inst(&ps);
 	if (ps.nb_elt <= 3)
-		small_sort(&ps);
+		ps_small_sort(&ps);
+	else if (ps.nb_elt <= INSERTION_SORT_LIMIT)
+		ps_insertion_sort(&ps);
 	else
-		other_sort(&ps);
+		ps_other_sort(&ps);
 	return (1);
 }

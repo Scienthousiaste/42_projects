@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 12:26:20 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/29 16:20:03 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/07/29 19:16:30 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 #define OUTSIDE_OF_INTEGER_LIMITS 5
 #define NOT_A_NUMBER 6
 #define DUPLICATE_NUMBER 7
+
+#define INSERTION_SORT_LIMIT 15
 
 #define SA 0
 #define SB 1
@@ -78,6 +80,7 @@ int				do_inst(char *inst, t_push_swap *ps);
 void			build_tab_inst(t_push_swap *ps);
 int				sorted_a_and_empty_b(t_push_swap *ps);
 void			tab_free(char **split_tab);
-void			other_sort(t_push_swap *ps);
+void			ps_other_sort(t_push_swap *ps);
+void			ps_insertion_sort(t_push_swap *ps);
 
 #endif
