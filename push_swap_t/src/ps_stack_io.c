@@ -6,11 +6,34 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 14:51:55 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/29 16:22:15 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/08/05 18:17:15 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void		ps_del_inside(t_ps_stack **stack, int value)
+{
+	t_ps_stack	*cur;
+	t_ps_stack	*prec;
+
+	if (!(*stack))
+		error(BAD_OPERATION);
+	prec = NULL;
+	cur = *stack;
+	while (cur->d != value)
+	{
+		prec = cur;
+		cur = cur->next;
+		if (!cur)
+			error(BAD_OPERATION);
+	}
+	if (!prec)
+		*stack = cur->next; 
+	else
+		prec->next = cur->next;
+	free(cur);
+}
 
 int			ps_pop_last(t_ps_stack **stack)
 {

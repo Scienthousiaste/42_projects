@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 18:58:25 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/29 19:16:21 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/08/05 18:13:36 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 // Theorie avec algos de tris tradi
 // si presque trié : insertion sort
 // sinon : quicksort ?
-
-int		log_do_inst(char *inst, t_push_swap *ps)
-{
-	ft_putstr(inst);
-	ft_putchar('\n');
-	return (do_inst(inst, ps));
-}
 
 void	pivoting(t_push_swap *ps)
 {
@@ -95,9 +88,11 @@ int		main(int ac, char **av)
 	build_tab_inst(&ps);
 	if (ps.nb_elt <= 3)
 		ps_small_sort(&ps);
-	else if (ps.nb_elt <= INSERTION_SORT_LIMIT)
+	else if (ps.nb_elt <= 9030)//INSERTION_SORT_LIMIT)
 		ps_insertion_sort(&ps);
 	else
 		ps_other_sort(&ps);
+	stack_del(&ps.a);
+	stack_del(&ps.b);
 	return (1);
 }

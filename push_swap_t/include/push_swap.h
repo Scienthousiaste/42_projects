@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 12:26:20 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/29 19:16:30 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/08/05 18:16:31 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 #include <unistd.h>
+#include <limits.h>
 #include "libft.h"
 #include "get_next_line.h"
 #include "t_ps_stack.h"
@@ -25,6 +26,7 @@
 #define OUTSIDE_OF_INTEGER_LIMITS 5
 #define NOT_A_NUMBER 6
 #define DUPLICATE_NUMBER 7
+#define COULDNT_DO_INST 8
 
 #define INSERTION_SORT_LIMIT 15
 
@@ -82,5 +84,7 @@ int				sorted_a_and_empty_b(t_push_swap *ps);
 void			tab_free(char **split_tab);
 void			ps_other_sort(t_push_swap *ps);
 void			ps_insertion_sort(t_push_swap *ps);
+void			ps_stupid_insertion_sort(t_push_swap *ps);
+int				log_do_inst(char *inst, t_push_swap *ps);
 
 #endif

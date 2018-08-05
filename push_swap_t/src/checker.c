@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 13:44:26 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/29 15:24:29 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/08/05 11:53:26 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		main(int ac, char **av)
 		return (0);
 	init_ps(&ps);
 	build_a(ac, av, &ps);
-	while (get_next_line(1, &inst) == 1)
+	while (get_next_line(0, &inst) == 1)
 	{
 		if (!(do_inst(inst, &ps)))
 			break ;

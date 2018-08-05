@@ -6,11 +6,18 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 10:51:57 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/29 12:28:54 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/08/02 13:01:41 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int		log_do_inst(char *inst, t_push_swap *ps)
+{
+	ft_putstr(inst);
+	ft_putchar('\n');
+	return (do_inst(inst, ps));
+}
 
 void	print_stack(t_ps_stack *s)
 {

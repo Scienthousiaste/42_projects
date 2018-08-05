@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 16:01:26 by tbehra            #+#    #+#             */
-/*   Updated: 2018/07/29 16:24:50 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/08/05 17:45:03 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,28 @@ int			ps_max(t_ps_stack *stack)
 		cur = cur->next;
 	}
 	return (max);
+}
+
+int			ps_min_pos(t_ps_stack *stack, t_ps_stack **min_elt)
+{
+	int			min;
+	t_ps_stack	*cur;
+
+	if (!stack)
+		error(0);
+	cur = stack;
+	min = stack->d;
+	*min_elt = cur;
+	while (cur)
+	{
+		if (cur->d < min)
+		{
+			min = cur->d;
+			*min_elt = cur;
+		}
+		cur = cur->next;
+	}
+	return (min);
 }
 
 int			ps_min(t_ps_stack *stack)
