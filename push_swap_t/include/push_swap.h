@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 12:26:20 by tbehra            #+#    #+#             */
-/*   Updated: 2018/08/05 18:16:31 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/09/12 12:09:21 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define DUPLICATE_NUMBER 7
 #define COULDNT_DO_INST 8
 
-#define INSERTION_SORT_LIMIT 15
+#define INSERTION_SORT_LIMIT 1500 //15 at the end?
 
 #define SA 0
 #define SB 1

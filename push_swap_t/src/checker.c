@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 13:44:26 by tbehra            #+#    #+#             */
-/*   Updated: 2018/08/05 11:53:26 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/09/12 14:07:02 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		main(int ac, char **av)
 	t_push_swap	ps;
 	char		*inst;
 
+	inst = NULL;
 	if (ac < 2)
 		return (0);
 	init_ps(&ps);

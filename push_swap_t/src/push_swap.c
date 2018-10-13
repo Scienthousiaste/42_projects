@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 18:58:25 by tbehra            #+#    #+#             */
-/*   Updated: 2018/08/05 18:13:36 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/10/13 18:44:34 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		main(int ac, char **av)
 	build_tab_inst(&ps);
 	if (ps.nb_elt <= 3)
 		ps_small_sort(&ps);
-	else if (ps.nb_elt <= 9030)//INSERTION_SORT_LIMIT)
+	else if (ps.nb_elt <= INSERTION_SORT_LIMIT) 
 		ps_insertion_sort(&ps);
 	else
 		ps_other_sort(&ps);

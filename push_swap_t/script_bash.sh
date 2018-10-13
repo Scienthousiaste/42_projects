@@ -8,6 +8,15 @@ while [ $I -le 10 ]; do
 	I=$((I+1));
 done
 
+echo "entre -5 et 5"
+I=1;
+while [ $I -le 10 ]; do
+	ARG=`ruby -e "puts (-5..4).to_a.shuffle.join(' ')"`;
+	./push_swap $ARG | ./checker $ARG
+	./push_swap $ARG | wc -l;
+	I=$((I+1));
+done
+
 echo "entre -50 et 50"
 
 I=1;
