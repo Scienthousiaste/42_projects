@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 18:58:25 by tbehra            #+#    #+#             */
-/*   Updated: 2018/10/13 18:44:34 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/11/01 15:15:25 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,8 @@ void	ps_small_sort(t_push_swap *ps)
 {
 	if (ps->nb_elt <= 1)
 		return ;
-	else if (ps->nb_elt == 2)
-	{
-		if (ps->a->d > ps->a->next->d)
-			log_do_inst("sa", ps);
-	}
+	else if ((ps->nb_elt == 2) && (ps->a->d > ps->a->next->d))
+		log_do_inst("sa", ps);
 	else if (ps->nb_elt == 3)
 	{
 		if (ps_is_sorted(ps->a))

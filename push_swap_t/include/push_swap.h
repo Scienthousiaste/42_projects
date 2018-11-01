@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 12:26:20 by tbehra            #+#    #+#             */
-/*   Updated: 2018/09/12 12:09:21 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/11/01 15:50:11 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define DUPLICATE_NUMBER 7
 #define COULDNT_DO_INST 8
 
-#define INSERTION_SORT_LIMIT 1500 //15 at the end?
+#define INSERTION_SORT_LIMIT 15
 
 #define SA 0
 #define SB 1
@@ -86,5 +86,7 @@ void			ps_other_sort(t_push_swap *ps);
 void			ps_insertion_sort(t_push_swap *ps);
 void			ps_stupid_insertion_sort(t_push_swap *ps);
 int				log_do_inst(char *inst, t_push_swap *ps);
+t_ps_stack		*clone_stack(t_ps_stack *s);
+void			build_correct_order(t_push_swap *ps);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 14:03:45 by tbehra            #+#    #+#             */
-/*   Updated: 2018/10/13 17:30:05 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/11/01 15:44:56 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 typedef struct 			s_ps_stack
 {
 	int					d;
+	unsigned int		correct_order;
 	struct s_ps_stack	*next;
+	struct s_ps_stack	*original_element;
 }						t_ps_stack;
 
 t_ps_stack				*ps_new(int value);

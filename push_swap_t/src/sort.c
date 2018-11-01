@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 16:18:55 by tbehra            #+#    #+#             */
-/*   Updated: 2018/10/13 18:44:36 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/11/01 15:44:54 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ps_other_sort(t_push_swap *ps)
 	ft_putstr("nb missorted : ");
 	ft_putnbr(count_inc_transitions(ps->a));
 	ft_putchar('\n');
+	build_correct_order(ps);
 	if (count_inc_transitions(ps->a) == 1)
 		rotate_till_finished(ps->a);
 }

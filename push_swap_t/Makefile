@@ -6,7 +6,7 @@
 #    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/14 16:14:56 by tbehra            #+#    #+#              #
-#    Updated: 2018/08/02 13:10:10 by tbehra           ###   ########.fr        #
+#    Updated: 2018/11/01 15:48:45 by tbehra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,11 @@ INCDIR	= include
 
 SRC_CH	= checker.c ps_stack.c ps_stack_io.c swap.c push.c rotate.c 		\
 		  rev_rotate.c display.c instructions.c utils.c ps_init.c sort.c	\
+		  preemptive_sort.c
 
 SRC_PS	= push_swap.c ps_stack.c ps_stack_io.c swap.c push.c rotate.c		\
 		  rev_rotate.c display.c instructions.c utils.c ps_init.c sort.c	\
+		  preemptive_sort.c
 
 HEAD	= push_swap.h get_next_line.h libft.h t_ps_stack.h
 

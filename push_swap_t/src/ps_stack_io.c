@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 14:51:55 by tbehra            #+#    #+#             */
-/*   Updated: 2018/08/05 18:17:15 by tbehra           ###   ########.fr       */
+/*   Updated: 2018/11/01 15:49:59 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,7 @@ t_ps_stack	*ps_new(int value)
 		error(MALLOC_ERROR);
 	new->d = value;
 	new->next = NULL;
+	new->correct_order = 0;
+	new->original_element = NULL;
 	return (new);
 }
