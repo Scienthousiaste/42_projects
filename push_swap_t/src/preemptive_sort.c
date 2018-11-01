@@ -14,6 +14,19 @@
 
 #include <stdio.h> //t
 
+void			free_stack(t_ps_stack **s)
+{
+	t_ps_stack *cur;
+
+	while(*s)
+	{
+		cur = *s;
+		*s = (*s)->next;
+		free(cur);
+	}
+	free(*s);
+}
+
 t_ps_stack		*clone_stack(t_ps_stack *s)
 {
 	t_ps_stack	*new_stack;
@@ -39,20 +52,6 @@ t_ps_stack		*clone_stack(t_ps_stack *s)
 	return ptr_start_new_stack;
 }
 
-
-/*
-void    swap_elements(t_ps_stack *l1, t_ps_stack *l2, t_ps_stack *previous, t_ps_stack **begin_list)
-{
-	t_ps_stack *tmp;
-
-	tmp = l1->next;
-	l1->next = l2->next;
-	l2->next = l1;
-	if (previous)
-		previous->next = tmp;
-	else
-		*begin_list = l2;
-}*/
 
 void	swap_elements(t_ps_stack *e1, t_ps_stack *prev, t_ps_stack **stack)
 {
@@ -102,12 +101,6 @@ void	build_correct_order(t_push_swap *ps)
 	printf("\n");
 
 	int i = 0;
-	while (new_a)
-	{
-		i++;
-		printf("Elt n* %i, value: %i, orig_elt: %p\n", i, new_a->d, new_a->original_element);
-		new_a = new_a->next;
-	}
 	
 	new_a = begin_a;
 	printf("\n\n sort \n\n");
@@ -137,11 +130,14 @@ void	build_correct_order(t_push_swap *ps)
 	while (ps->a)
 	{
 		i++;
-		printf("Elt n* %i, value: %i, order: %i\n", i, ps->a->d, ps->a->correct_order);
+		printf("Elt n* %i, value: %i, order: %i, next: %p\n", i, ps->a->d, ps->a->correct_order, ps->a->next);
+
+		if (!ps->a->next)
+			break;
 		ps->a = ps->a->next;
 	}
 
 
 
-	//free_stack(new_a);
+	free_stack(&new_a);
 }
