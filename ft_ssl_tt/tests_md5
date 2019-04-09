@@ -1,0 +1,21 @@
+md5 -sp donne la meme chose que md5 -s p !
+quand il y a un -s mais plusieurs arguments, le premier argument qui suit s est considéré comme string sur laquelle appliquer md5, mais pas ce qui suit
+
+s'il y a un -s, il doit etre la des le debut et pour chaque arg
+
+md5 -s tests_md5 tests_md5 Makefile odkfoskf
+
+Emulate the behavior of the md5 executable (since it is more versatile than OpenSSL).
+
+If flags are not provided, be prepared to read/write from/to the console.
+
+
+Potentielles sources d'erreur
+- valeurs initiales sont "low order bytes first.."
+- tester message de taille 448, 447, 449...
+- endianness
+- unsigned ints, etc
+
+
+Le md5 ne donne pas les bons résultats sur les fichiers compilés (probleme de 0 ?)
+
