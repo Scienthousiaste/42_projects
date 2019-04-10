@@ -6,7 +6,7 @@
 #    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 17:07:23 by tbehra            #+#    #+#              #
-#    Updated: 2019/04/08 13:29:52 by tbehra           ###   ########.fr        #
+#    Updated: 2019/04/10 16:54:02 by tbehra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCDIR	= src
 OBJDIR	= obj
 INCDIR	= include
 
-SRC		= main.c md5.c md5_auxiliary_functions.c md5_init.c md5_loop.c utils.c
+SRC		=	main.c md5.c md5_auxiliary_functions.c md5_init.c md5_loop.c 	\
+			utils.c md5_build_block.c
 
 HEAD	= ft_ssl.h md5.h
 

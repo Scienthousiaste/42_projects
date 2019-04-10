@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 15:16:05 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/09 16:58:44 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/10 13:23:09 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@
 # include <math.h>
 # include "libft.h"
 # include "md5.h"
+
+# include <stdio.h> ///
 
 #endif
