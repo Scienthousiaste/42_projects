@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 15:46:25 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/10 18:26:25 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/12 14:39:00 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	build_t_tab(t_md5 *m)
 
 	i = -1;
 	while (++i < T_SIZE)
-		m->T[i] = floor(4294967296 * fabs(sin(i + 1)));
+		m->t[i] = floor(4294967296 * fabs(sin(i + 1)));
 }
 
 void	build_s_tab(t_md5 *m)
@@ -31,7 +31,7 @@ void	build_s_tab(t_md5 *m)
 
 	i = -1;
 	while (++i < T_SIZE)
-		m->S[i] = r[(4 * (i / 16)) + i % 4];
+		m->s[i] = r[(4 * (i / 16)) + i % 4];
 }
 
 void	build_aux_funcs(t_md5 *m)
@@ -64,10 +64,11 @@ void	init_name(t_md5 *m, int is_file, char *str)
 
 void	md5_init(t_md5 *m, int is_file, char *str)
 {
-	m->A = A_INIT;
-	m->B = B_INIT;
-	m->C = C_INIT;
-	m->D = D_INIT;
+	m->a = A_INIT;
+	m->b = B_INIT;
+	m->c = C_INIT;
+	m->d = D_INIT;
+	m->stdin_copy = NULL;
 	m->len = 0;
 	init_name(m, is_file, str);
 	m->flag_one_appended = 0;

@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ssl.h                                           :+:      :+:    :+:   */
+/*   sha256.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/24 15:16:05 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/12 12:12:38 by tbehra           ###   ########.fr       */
+/*   Created: 2019/04/11 14:40:52 by tbehra            #+#    #+#             */
+/*   Updated: 2019/04/12 15:33:42 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SSL_H
-# define FT_SSL_H
+#ifndef SHA256_H
+# define SHA256_H
 
-# define MD5_FLAGS "pqr"
-# define STDOUT_FLAG 4
-# define QUIET_FLAG 2
-# define REVERSE_FLAG 1
-# define NUMBER_OF_COMMANDS 2
 
-# include <fcntl.h>
-# include <stdint.h>
-# include <math.h>
-# include "libft.h"
-# include "md5.h"
-# include "sha256.h"
+# define INIT_0 0x6a09e667
+# define INIT_1 0xbb67ae85
+# define INIT_2 0x3c6ef372
+# define INIT_3 0xa54ff53a
+# define INIT_4 0x510e527f
+# define INIT_5 0x9b05688c
+# define INIT_6 0x1f83d9ab
+# define INIT_7 0x5be0cd19
 
-typedef struct	s_command
+# define K_SIZE 64
+
+typedef struct		s_sha
 {
-	char		*name;
-	void		(*cmd)(int ac, char **av);
-}				t_command;
+	unsigned int	options;
+	uint32_t		k[K_SIZE];
+	uint32_t		h[8];
+}					t_sha;
+
+void	sha256(int ac, char **av);
 
 #endif
