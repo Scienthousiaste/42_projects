@@ -6,7 +6,7 @@
 #    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 17:07:23 by tbehra            #+#    #+#              #
-#    Updated: 2019/04/11 14:49:00 by tbehra           ###   ########.fr        #
+#    Updated: 2019/04/15 17:46:27 by tbehra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ OBJDIR	= obj
 INCDIR	= include
 
 SRC		=	main.c md5.c md5_auxiliary_functions.c md5_init.c md5_loop.c 	\
-			utils.c md5_build_block.c sha256.c
+			utils.c md5_build_block.c sha256.c errors.c sha256_init.c		\
+			sha256_loop.c sha256_build_block.c sha256_auxiliary_functions.c \
+			sha256_auxiliary_functions2.c
 
 HEAD	= ft_ssl.h md5.h sha256.h
 

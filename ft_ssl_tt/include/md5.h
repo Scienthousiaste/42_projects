@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:07:16 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/12 14:39:54 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/15 17:13:00 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void				md5_loop(t_md5 *m, uint32_t *block);
 void				print_block(unsigned char *block, size_t size, int newline);
 void				print_digest(t_md5 *m);
 void				usage_md5(void);
-int					parse_options_md5(unsigned int *opt, int ac, char **av);
 int					error_no_file(t_md5 *m);
 int					error_reading_file(t_md5 *m);
 

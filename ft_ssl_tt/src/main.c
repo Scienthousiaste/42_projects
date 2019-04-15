@@ -6,13 +6,13 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 14:13:52 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/11 14:34:02 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/15 17:14:13 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-int	usage(void)
+int			usage(void)
 {
 	ft_putendl("Usage: ft_ssl [command]");
 	ft_putendl(" md5 [-pqr] [-s string]");
@@ -33,13 +33,15 @@ t_command	*parse_command(char *s, t_command *commands)
 	return (NULL);
 }
 
-t_command	*init_commands()
+t_command	*init_commands(void)
 {
 	int				i;
 	const char		*c[NUMBER_OF_COMMANDS] = {"md5", "sha256"};
-	void			(*cmds[NUMBER_OF_COMMANDS])(int ac, char **av)
-							= {&md5, &sha256};
+	void			(*cmds[NUMBER_OF_COMMANDS])(int ac, char **av);
 	t_command		*ret;
+
+	cmds[0] = &md5;
+	cmds[1] = &sha256;
 	i = 0;
 	if (!(ret = malloc(sizeof(t_command) * NUMBER_OF_COMMANDS)))
 		exit(1);
@@ -52,7 +54,7 @@ t_command	*init_commands()
 	return (ret);
 }
 
-void free_commands(t_command *c)
+void		free_commands(t_command *c)
 {
 	int i;
 
@@ -62,7 +64,7 @@ void free_commands(t_command *c)
 	free(c);
 }
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_command	*commands;
 	t_command	*cmd;

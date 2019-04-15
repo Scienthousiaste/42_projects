@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5_auxiliary_functions.c                          :+:      :+:    :+:   */
+/*   sha256_auxiliary_functions2.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 12:42:31 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/15 16:21:58 by tbehra           ###   ########.fr       */
+/*   Created: 2019/04/15 16:23:18 by tbehra            #+#    #+#             */
+/*   Updated: 2019/04/15 16:28:22 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-uint32_t	f_aux(uint32_t x, uint32_t y, uint32_t z)
+uint32_t	bigsig_0(uint32_t x)
 {
-	return ((x & y) | (~x & z));
+	return (rotr(x, 2) ^ rotr(x, 13) ^ rotr(x, 22));
 }
 
-uint32_t	g_aux(uint32_t x, uint32_t y, uint32_t z)
+uint32_t	bigsig_1(uint32_t x)
 {
-	return ((x & z) | (y & ~z));
+	return (rotr(x, 6) ^ rotr(x, 11) ^ rotr(x, 25));
 }
 
-uint32_t	h_aux(uint32_t x, uint32_t y, uint32_t z)
+uint32_t	sig_0(uint32_t x)
 {
-	return (x ^ y ^ z);
+	return (rotr(x, 7) ^ rotr(x, 18) ^ (x >> 3));
 }
 
-uint32_t	i_aux(uint32_t x, uint32_t y, uint32_t z)
+uint32_t	sig_1(uint32_t x)
 {
-	return (y ^ (x | ~z));
-}
-
-uint32_t	rotate_left(uint32_t x, int n)
-{
-	return (x << n | (x) >> (32 - n));
+	return (rotr(x, 17) ^ rotr(x, 19) ^ (x >> 10));
 }

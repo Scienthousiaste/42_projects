@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:51:56 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/10 17:32:35 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/15 17:39:29 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	do_last_block(t_md5 *m, unsigned char *str, int len_to_read)
 
 	i = 0;
 	if (len_to_read)
-		m->len += len_to_read * 8;
+		m->len += len_to_read << 3;
 	else
-		m->len += ft_strlen((char*)str) * 8;
+		m->len += ft_strlen((char*)str) << 3;
 	ft_bzero(m->last_block, BLOCK_SIZE);
 	if (!m->flag_one_appended)
 	{
@@ -57,8 +57,7 @@ void	fill_last_block(unsigned char *str, t_md5 *m, int len_to_go)
 
 void	partial_block_read(unsigned char *block, t_md5 *m, int n_read)
 {
-	fill_last_block((unsigned char*)block, m, n_read);
+	fill_last_block(block, m, n_read);
 	md5_loop(m, (uint32_t *)m->last_block);
-	m->len += MAX_SIZE_LAST_BLOCK << 3;
 	m->flag_one_appended = 1;
 }

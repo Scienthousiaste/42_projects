@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 15:46:25 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/12 14:39:00 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/15 16:13:02 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	init_name(t_md5 *m, int is_file, char *str)
 		m->name[0] = '"';
 		ft_strcpy(&(m->name[1]), str);
 		m->name[len_name - 2] = '"';
+		m->name[len_name - 1] = 0;
 	}
 }
 

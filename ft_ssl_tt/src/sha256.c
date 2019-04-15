@@ -6,58 +6,80 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 14:34:14 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/12 15:03:03 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/15 17:52:47 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-void	init_k_tab(t_sha *s)
+void	sha256_string(char *str, t_sha *s, int from_stdin)
 {
-	const uint32_t	k_[K_SIZE] = {
-		0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
-		0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01,
-		0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
-		0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa,
-		0x5cb0a9dc, 0x76f988da, 0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7,
-		0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967, 0x27b70a85, 0x2e1b2138,
-		0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
-		0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624,
-		0xf40e3585, 0x106aa070, 0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5,
-		0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3, 0x748f82ee, 0x78a5636f,
-		0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2};
-	int				i;
+	uint64_t	len_to_process;
+	(void)from_stdin;
 
-	i = 0;
-	while (i < K_SIZE)
-		s->k[i] = k_[i];
+	len_to_process = ft_strlen(str);
+	sha_init(s);
+	while (len_to_process >= MAX_SIZE_LAST_BLOCK)
+		if (len_to_process >= BLOCK_SIZE)
+		{
+			sha256_loop(s, (uint32_t *)str);
+			len_to_process -= BLOCK_SIZE;
+			str = &str[BLOCK_SIZE];
+			s->len += BLOCK_SIZE << 3;
+		}
+		else
+		{
+			sha_fill_last_block((unsigned char*)str, s, ft_strlen(str));
+			sha256_loop(s, (uint32_t *)s->last_block);
+			len_to_process = 0;
+			str = &str[MAX_SIZE_LAST_BLOCK];
+			s->len += MAX_SIZE_LAST_BLOCK << 3;
+			s->flag_one_appended = 1;
+		}
+	sha_last_block(s, (unsigned char*)str, 0);
+	if (from_stdin && s->options & STDOUT_FLAG)
+		ft_putstr(str);
+	print_sha256_digest(s);
 }
 
-void	init_h(t_sha *s)
+void	sha256_file(char *n, t_sha *s)
 {
-	s->h[0] = INIT_0;
-	s->h[1] = INIT_1;
-	s->h[2] = INIT_2;
-	s->h[3] = INIT_3;
-	s->h[4] = INIT_4;
-	s->h[5] = INIT_5;
-	s->h[6] = INIT_6;
-	s->h[7] = INIT_7;
+	(void)s;
+	(void)n;
+	ft_putstr("sha256 file\n");
 }
 
-void	sha_init(t_sha *s)
+void	sha256_stdin(t_sha *s)
 {
-	init_h(s);
-	init_k_tab(s);
+	(void)s;
+	ft_putstr("sha256 stdin\n");
 }
-
 
 void	sha256(int ac, char **av)
 {
-//	t_sha	s;
+	t_sha	s;
+	int		index;
+	int		no_file_yet;
 
-	(void)ac;
-	(void)av;
-
-	return ;
+	no_file_yet = 1;
+	index = parse_options(&(s.options), ac - 1, &av[1], SHA256_FLAGS);
+	if (index + 1 >= ac || s.options & STDOUT_FLAG)
+		sha256_stdin(&s);
+	index++;
+	while (index < ac)
+	{
+		if (strcmp(av[index], "-p") == 0)
+		{
+			s.options = s.options | STDOUT_FLAG;
+			sha256_stdin(&s);
+		}
+		else if (strcmp(av[index], "-s") == 0 && index + 1 < ac && no_file_yet)
+			sha256_string(av[index++ + 1], &s, 0);
+		else
+		{
+			sha256_file(av[index], &s);
+			no_file_yet = 0;
+		}
+		index++;
+	}
 }

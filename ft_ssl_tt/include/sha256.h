@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 14:40:52 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/12 15:33:42 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/15 17:45:42 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,38 @@
 # define INIT_7 0x5be0cd19
 
 # define K_SIZE 64
+# define W_SIZE 64
+# define H_SIZE 8
 
 typedef struct		s_sha
 {
 	unsigned int	options;
 	uint32_t		k[K_SIZE];
-	uint32_t		h[8];
+	uint32_t		w[W_SIZE];
+	uint32_t		h[H_SIZE];
+	uint32_t		hh[H_SIZE];
+	unsigned char	last_block[BLOCK_SIZE];
+	int				len;
+	int				flag_one_appended;
 }					t_sha;
 
 void	sha256(int ac, char **av);
+void	sha_init(t_sha *s);
+void	init_k_tab(t_sha *s);
+void	init_h(t_sha *s);
+void	sha256_stdin(t_sha *s);
+void	print_sha256_digest(t_sha *s);
+
+uint32_t	ch(uint32_t x, uint32_t y, uint32_t z);
+uint32_t	maj(uint32_t x, uint32_t y, uint32_t z);
+uint32_t	rotr(uint32_t x, int n);
+uint32_t	bigsig_0(uint32_t x);
+uint32_t	bigsig_1(uint32_t x);
+uint32_t	sig_0(uint32_t x);
+uint32_t	sig_1(uint32_t x);
+
+void		sha256_loop(t_sha *s, uint32_t *block);
+void		sha_fill_last_block(unsigned char *str, t_sha *s, int len_to_go);
+void		sha_last_block(t_sha *s, unsigned char *str, int len_to_read);
 
 #endif

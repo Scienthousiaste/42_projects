@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 16:15:37 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/12 14:42:32 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/15 13:04:16 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,6 @@ void	loop_operation(t_md5 *m, t_op_params *p)
 	t[2] = &m->c;
 	t[3] = &m->d;
 	f = p->first_letter;
-
-	//	printf("t[0] = %0x\n", *t[0]);
-	char aux_func_print;
-	if (p->aux_func == &f_aux)
-		aux_func_print = 'F';
-	if (p->aux_func == &g_aux)
-		aux_func_print = 'G';
-	if (p->aux_func == &h_aux)
-		aux_func_print = 'H';
-	if (p->aux_func == &i_aux)
-		aux_func_print = 'I';
-
-	//	printf("%#0x %#0x %#0x, %0#x. f= %i k= %i s= %i i= %i, aux_func : %c, letters: %c%c%c%c, T[i]=%#x\n", *t[(f + 1) % 4], *t[(f + 2) % 4], *t[(f + 3) % 4], p->aux_func(*t[(f + 1) % 4], *t[(f + 2) % 4], *t[(f + 3) % 4]), f, p->k, p->s, p->i + 1, aux_func_print, find_letter(t, f, m), find_letter(t, (f+1)%4, m),find_letter(t, (f+2)%4, m),find_letter(t, (f+3) %4, m), m->T[p->i]);
-
 	*t[f] += p->aux_func(*t[(f + 1) % 4], *t[(f + 2) % 4], *t[(f + 3) % 4])
 		+ m->x[p->k] + m->t[p->i];
 	*t[f] = *t[(f + 1) % 4] + rotate_left(*t[f], p->s);

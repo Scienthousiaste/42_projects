@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   md5_auxiliary_functions.c                          :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 12:42:31 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/15 16:21:58 by tbehra           ###   ########.fr       */
+/*   Created: 2019/04/15 12:05:20 by tbehra            #+#    #+#             */
+/*   Updated: 2019/04/15 12:08:16 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-uint32_t	f_aux(uint32_t x, uint32_t y, uint32_t z)
+void	usage_md5(void)
 {
-	return ((x & y) | (~x & z));
+	ft_putendl("Usage: md5 [-pqr] [-s string] [files ...]");
 }
 
-uint32_t	g_aux(uint32_t x, uint32_t y, uint32_t z)
+int		error_reading_file(t_md5 *m)
 {
-	return ((x & z) | (y & ~z));
+	ft_putstr("An error occured while trying to read file ");
+	ft_putendl(m->name);
+	return (1);
 }
 
-uint32_t	h_aux(uint32_t x, uint32_t y, uint32_t z)
+int		error_no_file(t_md5 *m)
 {
-	return (x ^ y ^ z);
-}
-
-uint32_t	i_aux(uint32_t x, uint32_t y, uint32_t z)
-{
-	return (y ^ (x | ~z));
-}
-
-uint32_t	rotate_left(uint32_t x, int n)
-{
-	return (x << n | (x) >> (32 - n));
+	ft_putstr("md5: No file with name ");
+	ft_putendl(m->name);
+	free(m->name);
+	return (1);
 }

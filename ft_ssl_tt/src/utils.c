@@ -6,33 +6,13 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 12:59:54 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/12 14:38:17 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/15 18:15:37 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-void	usage_md5(void)
-{
-	ft_putendl("Usage: md5 [-pqr] [-s string] [files ...]");
-}
-
-int		error_reading_file(t_md5 *m)
-{
-	ft_putstr("An error occured while trying to read file ");
-	ft_putendl(m->name);
-	return (1);
-}
-
-int		error_no_file(t_md5 *m)
-{
-	ft_putstr("md5: No file with name ");
-	ft_putendl(m->name);
-	free(m->name);
-	return (1);
-}
-
-int		parse_options_md5(unsigned int *opt, int ac, char **av)
+int		parse_options(unsigned int *opt, int ac, char **av, char *flags)
 {
 	int i;
 	int j;
@@ -44,8 +24,8 @@ int		parse_options_md5(unsigned int *opt, int ac, char **av)
 		j = 1;
 		while (av[i][j])
 		{
-			if (ft_strchr(MD5_FLAGS, av[i][j]))
-				*opt |= 1 << (ft_strlen(ft_strchr(MD5_FLAGS, av[i][j])) - 1);
+			if (ft_strchr(flags, av[i][j]))
+				*opt |= 1 << (ft_strlen(ft_strchr(flags, av[i][j])) - 1);
 			else
 				return (i);
 			j++;
@@ -88,7 +68,7 @@ void	print_block(unsigned char *block, size_t size, int newline)
 void	print_digest(t_md5 *m)
 {
 	uint32_t b[4];
-	
+
 	if (!(m->options & QUIET_FLAG) &&
 		!(m->options & REVERSE_FLAG) && ft_strcmp(m->name, "\"\""))
 	{
@@ -108,4 +88,10 @@ void	print_digest(t_md5 *m)
 		ft_putendl(m->name);
 	}
 	free(m->name);
+}
+
+void	print_sha256_digest(t_sha *s)
+{
+	ft_putstr("SHA256 ");
+	print_block((unsigned char*)s->h, sizeof(uint32_t) * H_SIZE, 0);
 }
