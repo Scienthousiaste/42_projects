@@ -1,7 +1,7 @@
 #!/bin/bash
 
-x=""
-for i in {0..200}
+x="x"
+for i in {1..200}
 do
 	./ft_ssl md5 -s $x > res_1
 	md5 -s $x > res_2
@@ -44,4 +44,3 @@ done
 rm fileX
 rm res_*
 
-# To add: stdin

@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 12:59:54 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/15 18:15:37 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/17 13:47:42 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,25 @@ void	print_digest(t_md5 *m)
 
 void	print_sha256_digest(t_sha *s)
 {
-	ft_putstr("SHA256 ");
-	print_block((unsigned char*)s->h, sizeof(uint32_t) * H_SIZE, 0);
+	uint32_t	b[H_SIZE];
+	int			i;
+
+	i = -1;
+	if (s->options & REVERSE_FLAG)
+	{
+		ft_putstr("SHA256(");
+		ft_putstr(s->name);
+		ft_putstr(") ");
+	}
+	while (++i < H_SIZE)
+		b[i] = to_big_endian(s->hh[i]);
+	print_block((unsigned char*)b, sizeof(uint32_t) * H_SIZE, 0);
+	if (!(s->options & QUIET_FLAG) && !(s->options & REVERSE_FLAG))
+	{
+		ft_putstr("  ");
+		ft_putendl(s->name);
+	}
+	else
+		ft_putchar('\n');
+	free(s->name);
 }

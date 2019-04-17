@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 16:15:35 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/15 17:46:44 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/16 14:00:25 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 uint32_t	ch(uint32_t x, uint32_t y, uint32_t z)
 {
-	return ((x & y) ^ ((!x) & z));
+	return ((x & y) ^ ((~x) & z));
 }
 
 uint32_t	maj(uint32_t x, uint32_t y, uint32_t z)

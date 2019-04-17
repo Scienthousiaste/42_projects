@@ -6,13 +6,25 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 16:07:09 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/15 17:48:33 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/17 13:54:16 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-void	sha_build_w_tab(t_sha *s, uint32_t *block)
+uint32_t	to_big_endian(uint32_t input)
+{
+	uint32_t res;
+
+	res = 0;
+	res = res | ((input & 0xff000000) >> 24);
+	res = res | ((input & 0x00ff0000) >> 8);
+	res = res | ((input & 0x0000ff00) << 8);
+	res = res | ((input & 0x000000ff) << 24);
+	return ((uint32_t)res);
+}
+
+void		sha_build_w_tab(t_sha *s, uint32_t *block)
 {
 	int i;
 
@@ -20,16 +32,18 @@ void	sha_build_w_tab(t_sha *s, uint32_t *block)
 	while (++i < W_SIZE)
 	{
 		if (i < 16)
-			s->w[i] = block[i];
+		{
+			s->w[i] = to_big_endian(block[i]);
+		}
 		else
 		{
 			s->w[i] = sig_1(s->w[i - 2]) + s->w[i - 7]
 				+ sig_0(s->w[i - 15]) + s->w[i - 16];
 		}
-	}	
+	}
 }
 
-void	init_sha_loop(t_sha *s, uint32_t *block)
+void		init_sha_loop(t_sha *s, uint32_t *block)
 {
 	int i;
 
@@ -39,9 +53,9 @@ void	init_sha_loop(t_sha *s, uint32_t *block)
 		s->h[i] = s->hh[i];
 }
 
-void	sha256_loop(t_sha *s, uint32_t *block)
+void		sha256_loop(t_sha *s, uint32_t *block)
 {
-	int i;
+	int			i;
 	uint32_t	t1;
 	uint32_t	t2;
 
@@ -49,8 +63,9 @@ void	sha256_loop(t_sha *s, uint32_t *block)
 	i = -1;
 	while (++i < 64)
 	{
-		t1 = s->h[7] + bigsig_1(s->h[4]) + ch(s->h[4], s->h[5], s->h[6]) + s->k[i] + s->w[i];
-		t2 = bigsig_0(s->h[0] + maj(s->h[0], s->h[1], s->h[2]));
+		t1 = s->h[7] + bigsig_1(s->h[4])
+			+ ch(s->h[4], s->h[5], s->h[6]) + s->k[i] + s->w[i];
+		t2 = bigsig_0(s->h[0]) + maj(s->h[0], s->h[1], s->h[2]);
 		s->h[7] = s->h[6];
 		s->h[6] = s->h[5];
 		s->h[5] = s->h[4];

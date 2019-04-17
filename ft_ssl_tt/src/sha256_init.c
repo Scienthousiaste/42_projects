@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 14:35:57 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/15 18:15:35 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/17 13:48:24 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,19 @@ void	init_hh(t_sha *s)
 	s->hh[7] = INIT_7;
 }
 
-void	sha_init(t_sha *s)
+void	sha_init_name(t_sha *s, int is_file, char *str)
+{
+	if (is_file)
+		s->name = ft_strdup(str);
+	else
+		s->name = ft_strdup("-");
+}
+
+void	sha_init(t_sha *s, int is_file, char *str)
 {
 	s->flag_one_appended = 0;
 	s->len = 0;
 	init_hh(s);
 	init_k_tab(s);
+	sha_init_name(s, is_file, str);
 }

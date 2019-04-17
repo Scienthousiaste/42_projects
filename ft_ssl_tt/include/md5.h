@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 11:07:16 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/15 17:13:00 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/17 14:01:10 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define C_INIT 0x98badcfe
 # define D_INIT 0x10325476
 
-# define BUFFER_SIZE 65536
+# define BUFFER_SIZE 1048576
 # define MAX_SIZE_LAST_BLOCK 56
 # define BLOCK_SIZE 64
 # define T_SIZE 64
@@ -49,7 +49,7 @@ typedef struct		s_md5
 
 typedef struct		s_op_params
 {
-	uint32_t		(*aux_func)(uint32_t x, uint32_t y, uint32_t z);	
+	uint32_t		(*aux_func)(uint32_t x, uint32_t y, uint32_t z);
 	int				first_letter;
 	int				k;
 	int				s;
@@ -59,9 +59,12 @@ typedef struct		s_op_params
 void				md5(int ac, char **av);
 void				md5_init(t_md5 *m, int is_file, char *name);
 void				build_t_tab(t_md5 *m);
-void				do_last_block(t_md5 *m, unsigned char *str, int len_to_read);
-void				fill_last_block(unsigned char *str, t_md5 *m, int len_to_go);
-void				partial_block_read(unsigned char* str, t_md5 *m, int n_read);
+void				do_last_block(t_md5 *m, unsigned char *str,
+						int len_to_read);
+void				fill_last_block(unsigned char *str, t_md5 *m,
+						int len_to_go);
+void				partial_block_read(unsigned char *str, t_md5 *m,
+						int n_read);
 
 uint32_t			f_aux(uint32_t x, uint32_t y, uint32_t z);
 uint32_t			g_aux(uint32_t x, uint32_t y, uint32_t z);

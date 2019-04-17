@@ -6,7 +6,7 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 14:34:14 by tbehra            #+#    #+#             */
-/*   Updated: 2019/04/15 17:52:47 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/04/17 13:52:08 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 void	sha256_string(char *str, t_sha *s, int from_stdin)
 {
 	uint64_t	len_to_process;
-	(void)from_stdin;
 
 	len_to_process = ft_strlen(str);
-	sha_init(s);
+	sha_init(s, 0, str);
 	while (len_to_process >= MAX_SIZE_LAST_BLOCK)
 		if (len_to_process >= BLOCK_SIZE)
 		{
@@ -42,17 +41,59 @@ void	sha256_string(char *str, t_sha *s, int from_stdin)
 	print_sha256_digest(s);
 }
 
-void	sha256_file(char *n, t_sha *s)
+int		sha256_file(char *n, t_sha *s)
 {
-	(void)s;
-	(void)n;
-	ft_putstr("sha256 file\n");
+	int				fd;
+	unsigned char	block[BLOCK_SIZE];
+	int				n_read;
+
+	sha_init(s, 1, n);
+	if ((fd = open(n, O_RDONLY)) < 0)
+		return (error_no_file_sha(s));
+	ft_bzero(block, BLOCK_SIZE);
+	while ((n_read = read(fd, block, BLOCK_SIZE)) >= MAX_SIZE_LAST_BLOCK)
+	{
+		if (n_read == BLOCK_SIZE)
+			sha256_loop(s, (uint32_t *)block);
+		else
+			partial_block_read_sha(block, s, n_read);
+		s->len += n_read << 3;
+		ft_bzero(block, BLOCK_SIZE);
+	}
+	if (n_read == -1)
+		return (error_reading_file_sha(s));
+	sha_last_block(s, block, n_read);
+	print_sha256_digest(s);
+	return (0);
 }
 
 void	sha256_stdin(t_sha *s)
 {
-	(void)s;
-	ft_putstr("sha256 stdin\n");
+	char			buf[BUFFER_SIZE];
+	char			*str;
+	char			*str2;
+	unsigned int	saved_options;
+
+	str = NULL;
+	str2 = NULL;
+	ft_bzero(buf, BUFFER_SIZE);
+	while (read(0, buf, BUFFER_SIZE))
+		if (!str)
+			str = ft_strdup(buf);
+		else
+		{
+			str2 = ft_strjoin(str, buf);
+			free(str);
+			str = ft_strdup(str2);
+			free(str2);
+		}
+	if (!str)
+		str = ft_strdup("");
+	saved_options = s->options;
+	s->options = s->options | QUIET_FLAG;
+	sha256_string(str, s, 1);
+	s->options = saved_options;
+	free(str);
 }
 
 void	sha256(int ac, char **av)
