@@ -1,0 +1,33 @@
+TO READ
+
+
+https://www.linuxjournal.com/article/6390
+://www.joelonsoftware.com/2001/12/11/back-to-basics/
+https://stackoverflow.com/questions/41103881/how-to-handle-memory-management-via-mmap-properly
+http://www.cocoawithlove.com/2010/05/look-at-how-malloc-works-on-mac.html
+http://danluu.com/malloc-tutorial/
+
+
+structure padding
+https://stackoverflow.com/questions/4306186/structure-padding-and-packing
+
+
+
+TO do
+
+- realloc
+- empecher de relink - sanitize le makefile de ma libft et de mon printf
+- check si il faut mettre les octets de sizeof(t_chunk) dans show_allocated_mem
+- verif que mmap remvnvoie bien qq chose..
+- ecrire tests pour mesurer performance, le temps et la perte de mémoire...
+
+- free dernier chunk : faudrait virer le truc de la liste.
+
+
+actuellement :
+- on combine quand on free si le chunk suivant est free aussi
+- on decoupe quand on reuse et qu'il reste de la place
+
+a faire
+- on regarde si on peut free la zone quand on free le dernier element de la zone
+
