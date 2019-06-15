@@ -6,7 +6,7 @@
 #    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/15 14:34:48 by tbehra            #+#    #+#              #
-#    Updated: 2019/06/15 14:37:45 by tbehra           ###   ########.fr        #
+#    Updated: 2019/06/15 18:13:28 by tbehra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJDIR	= obj
 
 SRC		= main.cpp 
 
-HEAD	= IOperand.hpp 
+HEAD	= AbstractVM.h IOperand.hpp Operand.hpp
 
 OBJ		= $(SRC:.cpp=.o)
 

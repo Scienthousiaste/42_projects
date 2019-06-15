@@ -6,12 +6,22 @@
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:36:26 by tbehra            #+#    #+#             */
-/*   Updated: 2019/06/15 15:06:51 by tbehra           ###   ########.fr       */
+/*   Updated: 2019/06/15 16:18:14 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IOPERAND_HPP
 # define IOPERAND_HPP
+
+# include "AbstractVM.h"
+
+typedef enum	tOperandType {
+	INT8,
+	INT16,
+	INT32,
+	FLOAT,
+	DOUBLE
+}				eOperandType;
 
 class IOperand {
 	public:
