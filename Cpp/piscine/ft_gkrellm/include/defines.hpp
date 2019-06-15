@@ -1,0 +1,32 @@
+#ifndef DEFINES_HPP
+# define DEFINES_HPP
+
+
+#define REFRESH_TIME_DISPLAY 50000
+#define REFRESH_TIME_UPDATE 250000
+
+#define DISPLAY_TERMINAL_FIRSTCOL 2
+
+#define HEIGHT_GRAPH 150
+
+#define COLOR_PAIR_BORDER 10
+#define COLOR_PAIR_GREEN 11
+#define COLOR_PAIR_RED 12
+
+#define COLOR_GRAY 50
+
+#define NCURSE_COLUMN_WIDTH 50
+#define FIRST_COLUMN 0
+
+
+#define KEY_ONE 27
+#define KEY_NINE 35
+
+#define MARGIN 5
+#define TEXTH 22
+#define TEXTSH 18
+#define TEXTSHDIFF ((TEXTH - TEXTSH) * 0.8)
+#define TITLE_COLOR sf::Color(250, 250, 250)
+#define VALUE_COLOR sf::Color(200, 200, 200)
+
+#endif

@@ -1,0 +1,5 @@
+-Iinclude
+-pedantic
+-std=c++98
+-Wall
+-Wextra
