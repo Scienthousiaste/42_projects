@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AbstractVM.h                                       :+:      :+:    :+:   */
+/*   Factory.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbehra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/15 14:53:02 by tbehra            #+#    #+#             */
-/*   Updated: 2019/06/15 16:20:51 by tbehra           ###   ########.fr       */
+/*   Created: 2019/06/16 11:12:35 by tbehra            #+#    #+#             */
+/*   Updated: 2019/06/17 10:28:05 by tbehra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ABSTRACTVM_H
-# define ABSTRACTVM_H
+#ifndef FACTORY_HPP
+# define FACTORY_HPP
 
 # include <string>
+# include <iostream>
+# include "defines.h"
+# include "Operand.hpp"
 # include "IOperand.hpp"
+# include "Exceptions.hpp"
 
-class AbstractVM {
+class IOperand;
+
+class Factory {
 
 	public:
 		IOperand const * createInt8( std::string const & value ) const;

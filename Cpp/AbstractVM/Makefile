@@ -6,23 +6,23 @@
 #    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/15 14:34:48 by tbehra            #+#    #+#              #
-#    Updated: 2019/06/15 18:13:28 by tbehra           ###   ########.fr        #
+#    Updated: 2019/06/17 17:18:49 by tbehra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: all re clean fclean
 
 CPP		= clang++
-FLAGS	= -pedantic -std=c++98 -Wall -Werror -Wextra
+FLAGS	= -std=c++11 -Wall -Werror -Wextra
 NAME	= AbstractVM 
 
 SRCDIR	= src
 INCDIR	= include
 OBJDIR	= obj
 
-SRC		= main.cpp 
+SRC		= main.cpp Factory.cpp Exceptions.cpp AbstractVM.cpp Parser.cpp
 
-HEAD	= AbstractVM.h IOperand.hpp Operand.hpp
+HEAD	= defines.h Factory.hpp IOperand.hpp Operand.hpp Exceptions.hpp IterStack.hpp AbstractVM.hpp Parser.hpp
 
 OBJ		= $(SRC:.cpp=.o)
 
