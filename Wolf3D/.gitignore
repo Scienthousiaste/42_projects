@@ -1,0 +1,4 @@
+*.o
+Makefile.gen
+wolf3D
+obj_web/
