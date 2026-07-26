@@ -1,0 +1,61 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tbehra <marvin@42.fr>                      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/04/21 16:22:15 by tbehra            #+#    #+#              #
+#    Updated: 2018/05/10 13:52:56 by tbehra           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+.PHONY: all re clean fclean libft
+
+CC			= gcc
+SRC_PATH	= src
+OBJ_PATH	= obj
+CPPFLAGS	= -Iinclude
+CFLAGS		= -Wall -Werror -Wextra
+LDFLAGS		= -Llibft
+LDLIBS		= -lft
+NAME		= libftprintf.a
+LIBFT		= libft.a
+SRC_NAME	= parsing.c ft_printf.c tab_conv.c conv_base.c conv_char_str.c		\
+			  unicode.c conv_decimal_ints.c padding.c output.c help_conv_str.c
+
+OBJ_NAME	= $(SRC_NAME:.c=.o)
+SRC			= $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+OBJ			= $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+
+all: $(NAME)
+
+libft: $(LIBFT)
+
+$(LIBFT):
+	make -C libft all
+
+$(NAME): $(OBJ)
+	@echo 1
+	$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
+	ar rc $@ $^
+#$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
+
+$(OBJ_PATH):
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+
+$(OBJ): $(OBJ_PATH)
+
+$(OBJ): $(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@echo 2
+	make $(OBJ_PATH)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
+
+clean:
+	rm -fv $(OBJ)
+	@rmdir $(OBJ_PATH) 2> /dev/null || true
+
+fclean: clean
+	rm -fv $(NAME)
+
+re: fclean all
